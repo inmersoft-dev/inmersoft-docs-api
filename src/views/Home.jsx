@@ -1,7 +1,8 @@
-import React from "react";
+// sito components
+import SitoContainer from "sito-container";
 
 function Home() {
-  return <div></div>;
+  return <SitoContainer></SitoContainer>;
 }
 
 export default Home;

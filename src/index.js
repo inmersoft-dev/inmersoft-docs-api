@@ -6,6 +6,7 @@ import App from "./App";
 
 // styles
 import "./index.css";
+import Home from "./views/Home";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(<Home />);
