@@ -3,91 +3,125 @@ const models = {
     status: "number: 200 - Ok / 422 - not found",
     data: [
       {
-        date: "number: milliseconds",
+        date: "number: date of creation's milliseconds",
         id: "number: unique id",
         name: "string: name",
         description: "string: short description",
         headerImages: [
           {
             id: "string: imageKit unique file id",
-            blurHash: "string",
-            url: "string",
+            blurHash: "string: blurHash",
+            url: "string: image source url",
           },
         ],
         panoramic: {
-          fileId: "string",
-          blurHash: "string",
-          url: "string",
+          id: "string: imageKit unique file id",
+          blurHash: "string: blurHash",
+          url: "string: image source url",
         },
         placeType: [
           {
-            date: "number",
-            id: "number",
-            name: "string",
-            classification: "boolean[3]",
+            date: "number: date of creation's milliseconds",
+            id: "number: placeType unique id",
+            name: "string: placeType name",
+            classification:
+              "boolean[3]: [dónde comer, dónde dormir, experiencia]",
           },
         ],
         routes: [
           {
-            date: "number",
-            id: "number",
-            name: "string",
-            description: "string",
+            date: "number: date of creation's milliseconds",
+            id: "number: unique id",
+            name: "string: route name",
+            description: "string: route short description",
             headerImages: [
               {
-                blurHash: "string",
-                id: "string",
-                url: "string",
+                id: "string: imageKit unique file id",
+                blurHash: "string: blurHash",
+                url: "string: image source url",
               },
             ],
-            activities: "string[]",
-            web: "string",
-            video: "string",
-            content: [],
-            comments: [],
+            activities: "string[]: activities name",
+            web: "string: route web site",
+            video: "string: route web video",
+            content: [
+              {
+                value: {
+                  content: "string: HTML content",
+                },
+                type: "string: text",
+              },
+              {
+                value: {
+                  url: "string: video url",
+                },
+                type: "string: video",
+              },
+              {
+                value: {
+                  id: "string: imageKit unique file id",
+                  blurHash: "string: blurHash",
+                  url: "string: image source url",
+                },
+                type: "string: photo",
+              },
+              {
+                value: {
+                  title: "string: accordion title",
+                  content: "string: accordion content",
+                },
+                type: "string: accordion",
+              },
+            ],
+            comments: [
+              {
+                comment: "string: customer comment content",
+                stars: "number: stars",
+              },
+            ],
           },
         ],
-        phone: "string",
-        address: "string",
-        services: "string[]",
-        socialMedia: "string[]",
-        web: "string",
-        video: "string",
+        phone: "string: telephone number",
+        address: "string: address",
+        services: "string[]: services name",
+        socialMedia: "string[]: social media URLs",
+        web: "string: web site",
+        video: "string: web video",
         latitude: "number",
         longitude: "number",
         content: [
           {
             value: {
-              content: "HTML (string)",
+              content: "string: HTML content",
             },
-            type: "text (string)",
+            type: "string: text",
           },
           {
             value: {
-              url: "string",
+              url: "string: video url",
             },
-            type: "video (string)",
+            type: "string: video",
           },
           {
             value: {
-              id: "string",
-              blurHash: "string",
-              url: "string",
+              id: "string: imageKit unique file id",
+              blurHash: "string: blurHash",
+              url: "string: image source url",
             },
-            type: "photo (string)",
+            type: "string: photo",
           },
           {
             value: {
-              title: "string",
-              content: "string",
+              title: "string: accordion title",
+              content: "string: accordion content",
             },
-            type: "accordion (string)",
+            type: "string: accordion",
           },
         ],
         comments: [
           {
-            comment: "string",
-            stars: "number",
+            comment: "string: customer comment content",
+            stars: "number: stars",
           },
         ],
       },
