@@ -22,7 +22,7 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import { Tooltip } from "@mui/material";
 
 // own components
-import EndpointCell from "../../components/EndpointCell/EndpointCell";
+import EndPointCell from "../../components/EndPointCell/EndPointCell";
 import RadialButton from "../../components/RadialButton/RadialButton";
 
 import config from "../../config";
@@ -155,7 +155,7 @@ const Trinidad = (props) => {
         />
       </Tooltip>
       {endPoints.map((item, i) => (
-        <EndpointCell endPoint={item} key={i} />
+        <EndPointCell endPoint={item} key={i} />
       ))}
     </SitoContainer>
   );
