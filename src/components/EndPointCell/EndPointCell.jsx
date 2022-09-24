@@ -37,6 +37,7 @@ import {
 
 // own components
 import TabView from "../../components/TabView/TabView";
+import Loading from "../Loading/Loading";
 
 // cookies
 import { getCookie } from "../../utils/auth";
@@ -49,11 +50,11 @@ import config from "../../config";
 export default function EndPointCell(props) {
   const theme = useTheme();
 
-  const { endPoint } = props;
+  const { endPoint, mode } = props;
 
   const { control, reset, handleSubmit, getValues, setValue } = useForm();
 
-  const [loading, setLoading] = useState(false);
+  const [loadingState, setLoadingState] = useState(false);
 
   const parametersReducer = (parametersState, action) => {
     const { type } = action;
@@ -115,22 +116,67 @@ export default function EndPointCell(props) {
   const handleExpandClick = () => setExpanded(!expanded);
 
   const onSubmit = async (d) => {
+    setLoadingState(true);
     setTab(1);
-    if (endPoint.method === "GET") {
-      try {
-        const response = await axios.get(endPoint.url, {
-          headers: {
-            ...getAuth,
-            Authorization: `Bearer ${getCookie(config.basicKey)}`,
-          },
-        });
-        const data = await response.data;
-        setRespond(data);
-      } catch (err) {
-        console.log(err);
-        setRespond(err);
-      }
+    switch (endPoint.method) {
+      case "POST":
+        try {
+          const postAttributes = {};
+          Object.keys(attributes).forEach((item) => {
+            if (attributes[item] && attributes[item].length) {
+              postAttributes[item] = [];
+              attributes[item].split("[!]").forEach((jtem) => {
+                postAttributes[item].push(jtem);
+              });
+            }
+          });
+          const response = await axios.post(
+            endPoint.url,
+            {
+              ...d,
+              ...postAttributes,
+            },
+            {
+              headers: {
+                ...getAuth,
+                Authorization: `Bearer ${getCookie(config.basicKey)}`,
+              },
+            }
+          );
+          const data = await response.data;
+          setRespond(data);
+        } catch (err) {
+          console.log(err);
+          setRespond(err);
+        }
+        break;
+      default: //* GET
+        try {
+          let queryParameters = "";
+          Object.keys(d).forEach((item, i) => {
+            if (d[item]) {
+              if (i === 0) queryParameters += `${item}=${d[item]}`;
+              else queryParameters += `&${item}=${d[item]}`;
+            }
+          });
+          const response = await axios.get(
+            `${endPoint.url}?${queryParameters}`,
+            {
+              headers: {
+                ...getAuth,
+                Authorization: `Bearer ${getCookie(config.basicKey)}`,
+              },
+            }
+          );
+          const data = await response.data;
+          setRespond(data);
+        } catch (err) {
+          console.log(err);
+          setRespond(err);
+        }
+        break;
     }
+    setLoadingState(false);
   };
 
   const addChips = (who) => {
@@ -169,9 +215,18 @@ export default function EndPointCell(props) {
   const clean = () => {
     const parametersToClean = {};
     Object.keys(parameters).map((item) => (parametersToClean[item] = ""));
-    console.log(parametersToClean);
     reset({ ...parametersToClean });
     setRespond({});
+  };
+
+  const reactJsonProps = {
+    theme: mode ? "rjv-default" : "google",
+    style: {
+      padding: "1rem",
+      borderRadius: "1rem",
+      overflow: "auto",
+    },
+    iconStyle: "triangle",
   };
 
   return (
@@ -296,19 +351,47 @@ export default function EndPointCell(props) {
             content={[
               <Box>
                 <Typography paragraph>Respuesta:</Typography>
-                <Box sx={{ background: theme.palette.background.paper }}></Box>
-              </Box>,
-              <Box>
-                <Typography paragraph>Prueba:</Typography>
                 <Box
                   sx={{
-                    background: theme.palette.background.paper,
                     minHeight: "300px",
                     width: "100%",
                   }}
                 >
-                  <ReactJson src={respond} />
+                  <ReactJson
+                    {...reactJsonProps}
+                    src={{
+                      root: {
+                        status: 200,
+                        data: [{}],
+                      },
+                    }}
+                  />
                 </Box>
+              </Box>,
+              <Box
+                sx={{
+                  background: theme.palette.background.default,
+                  minHeight: "300px",
+                  width: "100%",
+                  padding: "1rem",
+                  borderRadius: "1rem",
+                  overflow: "auto",
+                }}
+              >
+                <Loading
+                  visible={loadingState}
+                  sx={{
+                    width: "100%",
+                    height: "100%",
+                    position: loadingState ? "relative" : "absolute",
+                  }}
+                />
+                <Typography paragraph>Prueba:</Typography>
+                {!loadingState && (
+                  <Box>
+                    <ReactJson {...reactJsonProps} src={respond} />
+                  </Box>
+                )}
               </Box>,
             ]}
           />
@@ -320,4 +403,5 @@ export default function EndPointCell(props) {
 
 EndPointCell.propTypes = {
   endPoint: PropTypes.object.isRequired,
+  mode: PropTypes.bool.isRequired,
 };

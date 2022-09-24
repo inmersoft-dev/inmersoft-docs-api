@@ -23,6 +23,7 @@ import {
   events,
   from,
   id,
+  ids,
   news,
   places,
   placesAttributes,
@@ -44,21 +45,21 @@ const Trinidad = (props) => {
       url: `${config.apiTrinidadUrl}campaign/list`,
       lastUpdate: new Date().toLocaleString(),
       description: "POST / Optener campañas",
-      parameters: [id, count, from, attributes],
+      parameters: [ids, count, from, attributes],
       method: "POST",
     },
     {
       url: `${config.apiTrinidadUrl}event/list`,
       lastUpdate: new Date().toLocaleString(),
       description: "POST / Optener eventos",
-      parameters: [id, count, from, attributes],
+      parameters: [ids, count, from, attributes],
       method: "POST",
     },
     {
       url: `${config.apiTrinidadUrl}news/list`,
       lastUpdate: new Date().toLocaleString(),
       description: "POST / Optener noticias",
-      parameters: [id, count, from, attributes],
+      parameters: [ids, count, from, attributes],
       method: "POST",
     },
     {
@@ -66,7 +67,7 @@ const Trinidad = (props) => {
       lastUpdate: new Date().toLocaleString(),
       description: "POST / Optener lugares",
       parameters: [
-        id,
+        ids,
         count,
         from,
         routes,
@@ -80,7 +81,7 @@ const Trinidad = (props) => {
       url: `${config.apiTrinidadUrl}place-type/list`,
       lastUpdate: new Date().toLocaleString(),
       description: "POST / Optener tipos de lugares",
-      parameters: [id, count, from, places, placesAttributes],
+      parameters: [ids, count, from, places, placesAttributes],
       method: "POST",
     },
     {
@@ -94,18 +95,18 @@ const Trinidad = (props) => {
       url: `${config.apiTrinidadUrl}route/list`,
       lastUpdate: new Date().toLocaleString(),
       description: "POST / Optener rutas",
-      parameters: [id, count, from, places, placesAttributes],
+      parameters: [ids, count, from, places, placesAttributes],
       method: "POST",
     },
     {
       url: `${config.apiTrinidadUrl}survey/list`,
       lastUpdate: new Date().toLocaleString(),
       description: "POST / Optener formularios",
-      parameters: [id, count, from, attributes],
+      parameters: [ids, count, from, attributes],
       method: "POST",
     },
     {
-      url: `${config.apiTrinidadUrl}text/list`,
+      url: `${config.apiTrinidadUrl}text/get`,
       lastUpdate: new Date().toLocaleString(),
       description: "POST / Optener textos",
       parameters: [id],
@@ -118,35 +119,35 @@ const Trinidad = (props) => {
       url: `${config.apiTrinidadUrl}campaign/list`,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener campañas",
-      parameters: [id, count, from],
+      parameters: [count, from],
       method: "GET",
     },
     {
       url: `${config.apiTrinidadUrl}event/list`,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener eventos",
-      parameters: [id, count, from],
+      parameters: [count, from],
       method: "GET",
     },
     {
       url: `${config.apiTrinidadUrl}news/list`,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener noticias",
-      parameters: [id, count, from],
+      parameters: [count, from],
       method: "GET",
     },
     {
       url: `${config.apiTrinidadUrl}place/list`,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener lugares",
-      parameters: [id, count, from, routes, placeTypes],
+      parameters: [count, from, routes, placeTypes],
       method: "GET",
     },
     {
       url: `${config.apiTrinidadUrl}place-type/list`,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener tipos de lugares",
-      parameters: [id, count, from, places],
+      parameters: [count, from, places],
       method: "GET",
     },
     {
@@ -160,18 +161,18 @@ const Trinidad = (props) => {
       url: `${config.apiTrinidadUrl}route/list`,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener rutas",
-      parameters: [id, count, from, places],
+      parameters: [count, from, places],
       method: "GET",
     },
     {
       url: `${config.apiTrinidadUrl}survey/list`,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener formularios",
-      parameters: [id, count, from],
+      parameters: [count, from],
       method: "GET",
     },
     {
-      url: `${config.apiTrinidadUrl}text/list`,
+      url: `${config.apiTrinidadUrl}text/get`,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener textos",
       parameters: [id],
@@ -206,12 +207,12 @@ const Trinidad = (props) => {
         content={[
           <SitoContainer flexDirection="column" alignItems="center">
             {getPoints.map((item, i) => (
-              <EndPointCell endPoint={item} key={i} />
+              <EndPointCell endPoint={item} key={i} mode={mode} />
             ))}
           </SitoContainer>,
           <SitoContainer flexDirection="column" alignItems="center">
             {postPoints.map((item, i) => (
-              <EndPointCell endPoint={item} key={i} />
+              <EndPointCell endPoint={item} key={i} mode={mode} />
             ))}
           </SitoContainer>,
         ]}

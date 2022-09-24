@@ -1,6 +1,11 @@
 export const count = { id: "count", label: "cantidad", type: "number" };
 export const from = { id: "from", label: "inicio", type: "number" };
 export const id = { id: "id", label: "id", type: "number" };
+export const ids = {
+  id: "ids",
+  label: "ids",
+  type: "chips",
+};
 export const attributes = {
   id: "attributes",
   label: "atributos",
