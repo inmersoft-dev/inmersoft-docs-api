@@ -12,8 +12,12 @@
     "env-cmd": "^10.1.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
+    "react-cool-onclickoutside": "^1.7.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
+    "sito-container": "^0.2.21",
+    "sito-image": "^0.3.9",
     "styled-components": "^5.3.5"
   },
   "scripts": {
