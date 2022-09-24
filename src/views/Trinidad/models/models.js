@@ -2,6 +2,9 @@ const date = "number: date of creation's milliseconds";
 const id = "number: unique id";
 const name = "string: name";
 const description = "string: short description";
+const title = "Úrsula Pomares decididamente maestra";
+const subtitle =
+  "Por Patricia Lazo Rodríguez· Publicada 22 Diciembre 2021 · Actualizado 22 Diciembre 2021";
 const web = "string: web site";
 const video = "string: web video";
 
@@ -42,6 +45,14 @@ const content = [
       content: "string: accordion content",
     },
     type: "string: accordion",
+  },
+];
+
+const formContent = [
+  {
+    options: "string: [!] options for the question",
+    question: "string: question topic",
+    type: "string: checkbox / radio / text / emotion",
   },
 ];
 
@@ -91,6 +102,42 @@ const place = {
   comments,
 };
 
+const news = {
+  date,
+  id,
+  title,
+  subtitle,
+  headerImages,
+  content,
+  comments,
+};
+
+const event = {
+  date,
+  id,
+  title,
+  subtitle,
+  headerImages,
+  content,
+  comments,
+  startDate: "number: start date's milliseconds",
+  endDate: "number: end date's milliseconds",
+};
+
+const survey = {
+  date,
+  id,
+  name,
+  content: formContent,
+};
+
+const text = {
+  date,
+  id,
+  name,
+  content,
+};
+
 const models = {
   place: {
     status: "number: 200 - Ok / 422 - not found",
@@ -104,6 +151,11 @@ const models = {
     status: "number: 200 - Ok / 422 - not found",
     data: [{ ...placeType, places: [place] }],
   },
+  news: { status: "number: 200 - Ok / 422 - not found", data: [news] },
+  event: { status: "number: 200 - Ok / 422 - not found", data: [event] },
+  campaign: { status: "number: 200 - Ok / 422 - not found", data: [] },
+  survey: { status: "number: 200 - Ok / 422 - not found", data: [survey] },
+  text: { status: "number: 200 - Ok / 422 - not found", data: [text] },
 };
 
 export default models;
