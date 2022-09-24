@@ -226,6 +226,8 @@ export default function EndPointCell(props) {
       borderRadius: "1rem",
       overflow: "auto",
     },
+    displayObjectSize: false,
+    displayDataTypes: false,
     iconStyle: "triangle",
   };
 
@@ -370,12 +372,8 @@ export default function EndPointCell(props) {
               </Box>,
               <Box
                 sx={{
-                  background: theme.palette.background.default,
                   minHeight: "300px",
                   width: "100%",
-                  padding: "1rem",
-                  borderRadius: "1rem",
-                  overflow: "auto",
                 }}
               >
                 <Loading
