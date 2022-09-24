@@ -28,6 +28,12 @@ const models = {
               "boolean[3]: [dónde comer, dónde dormir, experiencia]",
           },
         ],
+        noPlaceTypes: [
+          {
+            id: "number: placeType unique id",
+            name: "string: placeType name",
+          },
+        ],
         routes: [
           {
             date: "number: date of creation's milliseconds",
@@ -81,6 +87,7 @@ const models = {
             ],
           },
         ],
+        noRoutes: [{ id: "number: unique id", name: "string: route name" }],
         phone: "string: telephone number",
         address: "string: address",
         services: "string[]: services name",
