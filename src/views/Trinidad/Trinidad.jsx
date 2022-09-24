@@ -26,6 +26,22 @@ import EndpointCell from "../../components/EndpointCell/EndpointCell";
 import RadialButton from "../../components/RadialButton/RadialButton";
 
 import config from "../../config";
+import {
+  attributes,
+  count,
+  events,
+  eventsAttributes,
+  from,
+  id,
+  news,
+  newsAttributes,
+  places,
+  placesAttributes,
+  placeTypes,
+  placeTypesAttributes,
+  routes,
+  routesAttributes,
+} from "../../utils/inputPrefab";
 
 const Trinidad = (props) => {
   const { toggleMode, mode } = props;
@@ -36,59 +52,94 @@ const Trinidad = (props) => {
       function: campaignList,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener campañas",
+      parameters: [id, count, from, attributes],
     },
     {
       url: `${config.apiTrinidadUrl}event/list`,
       function: eventList,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener eventos",
+      parameters: [id, count, from, attributes],
     },
     {
       url: `${config.apiTrinidadUrl}news/list`,
       function: newsList,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener noticias",
+      parameters: [id, count, from, attributes],
     },
     {
       url: `${config.apiTrinidadUrl}place/list`,
       function: placeList,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener lugares",
+      parameters: [
+        id,
+        count,
+        from,
+        attributes,
+        routes,
+        routesAttributes,
+        placeTypes,
+        placeTypesAttributes,
+      ],
     },
     {
       url: `${config.apiTrinidadUrl}place-type/list`,
       function: placeTypeList,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener tipos de lugares",
+      parameters: [id, count, from, attributes, places, placesAttributes],
     },
     {
       url: `${config.apiTrinidadUrl}review/list`,
       function: reviewList,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener comentarios",
+      parameters: [
+        id,
+        count,
+        from,
+        attributes,
+        places,
+        placesAttributes,
+        routes,
+        routesAttributes,
+        news,
+        newsAttributes,
+        events,
+        eventsAttributes,
+      ],
     },
     {
       url: `${config.apiTrinidadUrl}route/list`,
       function: routeList,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener rutas",
+      parameters: [id, count, from, places, placesAttributes],
     },
     {
       url: `${config.apiTrinidadUrl}survey/list`,
       function: surveyList,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener formularios",
+      parameters: [id, count, from],
     },
     {
       url: `${config.apiTrinidadUrl}text/list`,
       function: textList,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener textos",
+      parameters: [id],
     },
   ];
 
   return (
-    <SitoContainer alignItems="center" flexDirection="column" fullWidth>
+    <SitoContainer
+      alignItems="center"
+      flexDirection="column"
+      sx={{ width: "100%" }}
+    >
       <Tooltip title={mode ? "Modo Oscuro" : "Modo Claro"}>
         <RadialButton
           sx={{
