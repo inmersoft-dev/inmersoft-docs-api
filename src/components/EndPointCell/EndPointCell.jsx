@@ -1,6 +1,6 @@
 import { useState, useEffect, useReducer } from "react";
 import { useForm, Controller } from "react-hook-form";
-import JSONViewer from "react-json-viewer";
+import ReactJson from "react-json-view";
 
 import axios from "axios";
 
@@ -52,6 +52,8 @@ export default function EndPointCell(props) {
   const { endPoint } = props;
 
   const { control, reset, handleSubmit, getValues, setValue } = useForm();
+
+  const [loading, setLoading] = useState(false);
 
   const parametersReducer = (parametersState, action) => {
     const { type } = action;
@@ -113,7 +115,7 @@ export default function EndPointCell(props) {
   const handleExpandClick = () => setExpanded(!expanded);
 
   const onSubmit = async (d) => {
-    console.log(d);
+    setTab(1);
     if (endPoint.method === "GET") {
       try {
         const response = await axios.get(endPoint.url, {
@@ -162,6 +164,14 @@ export default function EndPointCell(props) {
       default: //* get
         return "17px 15px";
     }
+  };
+
+  const clean = () => {
+    const parametersToClean = {};
+    Object.keys(parameters).map((item) => (parametersToClean[item] = ""));
+    console.log(parametersToClean);
+    reset({ ...parametersToClean });
+    setRespond({});
   };
 
   return (
@@ -275,7 +285,7 @@ export default function EndPointCell(props) {
             >
               Ejecutar
             </Button>
-            <Button type="button" onClick={reset} variant="outlined">
+            <Button type="button" onClick={clean} variant="outlined">
               Limpiar
             </Button>
           </SitoContainer>
@@ -286,10 +296,19 @@ export default function EndPointCell(props) {
             content={[
               <Box>
                 <Typography paragraph>Respuesta:</Typography>
+                <Box sx={{ background: theme.palette.background.paper }}></Box>
               </Box>,
               <Box>
                 <Typography paragraph>Prueba:</Typography>
-                <JSONViewer json={respond} />
+                <Box
+                  sx={{
+                    background: theme.palette.background.paper,
+                    minHeight: "300px",
+                    width: "100%",
+                  }}
+                >
+                  <ReactJson src={respond} />
+                </Box>
               </Box>,
             ]}
           />
