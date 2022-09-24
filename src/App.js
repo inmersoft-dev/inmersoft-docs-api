@@ -1,16 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // images
 import logo from "./logo.svg";
 
 // @mui components
-import { ThemeProvider, CssBaseline } from "@mui/material";
+import { ThemeProvider, CssBaseline, Box, Tooltip, Link } from "@mui/material";
 
 // routes
 import { HashRouter, Routes, Route } from "react-router-dom";
 
 // own components
 import Notification from "./components/Notification/Notification";
+import RadialButton from "./components/RadialButton/RadialButton";
+
+// @mui icons
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
 
 // views
 import Trinidad from "./views/Trinidad/Trinidad";
@@ -31,6 +36,10 @@ function App() {
 
   const toggleMode = () => setMode(!mode);
 
+  useEffect(() => {
+    console.log(mode);
+  }, [mode]);
+
   return (
     <ThemeProvider theme={mode ? light : dark}>
       <CssBaseline />
@@ -40,24 +49,36 @@ function App() {
           <Route
             path="/"
             element={
-              <div className="App">
+              <Box className="App">
+                <Tooltip title={mode ? "Modo Oscuro" : "Modo Claro"}>
+                  <RadialButton
+                    sx={{
+                      marginTop: 0,
+                      position: "fixed",
+                      top: "20px",
+                      right: "20px",
+                      zIndex: 20,
+                      transition: "top 500ms ease",
+                    }}
+                    onClick={toggleMode}
+                    icon={mode ? <DarkModeIcon /> : <LightModeIcon />}
+                  />
+                </Tooltip>
                 <header className="App-header">
                   <img src={logo} className="App-logo" alt="logo" />
                   <p>
                     Presiona <u>comenzar</u> para ir al Índice
                   </p>
-                  <a className="App-link" href="/#/indexes">
+                  <Link className="App-link" href="/#/indexes">
                     Comenzar
-                  </a>
+                  </Link>
                 </header>
-              </div>
+              </Box>
             }
           />
           <Route
             path="/indexes"
-            element={<Home />}
-            toggleMode={toggleMode}
-            mode={mode}
+            element={<Home toggleMode={toggleMode} mode={mode} />}
           />
           <Route
             path="/trinidad"

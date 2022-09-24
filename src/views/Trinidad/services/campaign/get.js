@@ -15,7 +15,7 @@ export const campaignList = async (id = undefined) => {
   let response;
   try {
     response = await axios.get(
-      `${config.apiUrl}campaign/list${id || id === 0 ? `?id=${id}` : ""}`,
+      `${config.apiTrinidadUrl}campaign/list${id || id === 0 ? `?id=${id}` : ""}`,
       {
         headers: {
           ...getAuth,

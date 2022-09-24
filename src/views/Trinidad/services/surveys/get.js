@@ -14,7 +14,7 @@ import { getCookie } from "../../../../utils/auth";
 export const surveyList = async (id = undefined) => {
   let response;
   try {
-    response = await axios.get(`${config.apiUrl}survey/list${id || id === 0 ? `?id=${id}` : ""}`, {
+    response = await axios.get(`${config.apiTrinidadUrl}survey/list${id || id === 0 ? `?id=${id}` : ""}`, {
       headers: { ...getAuth, Authorization: `Bearer ${getCookie(config.basicKey)}` },
     });
     const data = await response.data;

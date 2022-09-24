@@ -14,7 +14,7 @@ import { getCookie } from "../../../../utils/auth";
 export const placeList = async (id = undefined) => {
   let response;
   try {
-    response = await axios.get(`${config.apiUrl}place/list${id || id === 0 ? `?id=${id}` : ""}`, {
+    response = await axios.get(`${config.apiTrinidadUrl}place/list${id || id === 0 ? `?id=${id}` : ""}`, {
       headers: { ...getAuth, Authorization: `Bearer ${getCookie(config.basicKey)}` },
     });
     const data = await response.data;

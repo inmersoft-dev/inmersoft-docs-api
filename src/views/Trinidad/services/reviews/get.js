@@ -9,8 +9,11 @@ import { getCookie } from "../../../../utils/auth";
 export const reviewList = async () => {
   let response;
   try {
-    response = await axios.get(`${config.apiUrl}review/list`, {
-      headers: { ...getAuth, Authorization: `Bearer ${getCookie(config.basicKey)}` },
+    response = await axios.get(`${config.apiTrinidadUrl}review/list`, {
+      headers: {
+        ...getAuth,
+        Authorization: `Bearer ${getCookie(config.basicKey)}`,
+      },
     });
     const data = await response.data;
     return data;
