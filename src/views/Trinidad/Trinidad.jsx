@@ -34,6 +34,9 @@ import {
 } from "../../utils/inputPrefab";
 import TabView from "../../components/TabView/TabView";
 
+// models
+import models from "./models/models";
+
 const Trinidad = (props) => {
   const { toggleMode, mode } = props;
 
@@ -47,6 +50,7 @@ const Trinidad = (props) => {
       description: "POST / Optener campañas",
       parameters: [ids, count, from, attributes],
       method: "POST",
+      model: "campaign",
     },
     {
       url: `${config.apiTrinidadUrl}event/list`,
@@ -54,6 +58,7 @@ const Trinidad = (props) => {
       description: "POST / Optener eventos",
       parameters: [ids, count, from, attributes],
       method: "POST",
+      model: "event",
     },
     {
       url: `${config.apiTrinidadUrl}news/list`,
@@ -61,6 +66,7 @@ const Trinidad = (props) => {
       description: "POST / Optener noticias",
       parameters: [ids, count, from, attributes],
       method: "POST",
+      model: "news",
     },
     {
       url: `${config.apiTrinidadUrl}place/list`,
@@ -76,6 +82,7 @@ const Trinidad = (props) => {
         placeTypesAttributes,
       ],
       method: "POST",
+      model: "place",
     },
     {
       url: `${config.apiTrinidadUrl}place-type/list`,
@@ -83,6 +90,7 @@ const Trinidad = (props) => {
       description: "POST / Optener tipos de lugares",
       parameters: [ids, count, from, places, placesAttributes],
       method: "POST",
+      model: "placeType",
     },
     {
       url: `${config.apiTrinidadUrl}review/list`,
@@ -90,6 +98,7 @@ const Trinidad = (props) => {
       description: "POST / Optener comentarios",
       parameters: [places, routes, news, events],
       method: "POST",
+      model: "review",
     },
     {
       url: `${config.apiTrinidadUrl}route/list`,
@@ -97,6 +106,7 @@ const Trinidad = (props) => {
       description: "POST / Optener rutas",
       parameters: [ids, count, from, places, placesAttributes],
       method: "POST",
+      model: "route",
     },
     {
       url: `${config.apiTrinidadUrl}survey/list`,
@@ -104,6 +114,7 @@ const Trinidad = (props) => {
       description: "POST / Optener formularios",
       parameters: [ids, count, from, attributes],
       method: "POST",
+      model: "survey",
     },
     {
       url: `${config.apiTrinidadUrl}text/get`,
@@ -111,6 +122,7 @@ const Trinidad = (props) => {
       description: "POST / Optener textos",
       parameters: [id],
       method: "POST",
+      model: "text",
     },
   ];
 
@@ -121,6 +133,7 @@ const Trinidad = (props) => {
       description: "GET / Optener campañas",
       parameters: [count, from],
       method: "GET",
+      model: "campaign",
     },
     {
       url: `${config.apiTrinidadUrl}event/list`,
@@ -128,6 +141,7 @@ const Trinidad = (props) => {
       description: "GET / Optener eventos",
       parameters: [count, from],
       method: "GET",
+      model: "event",
     },
     {
       url: `${config.apiTrinidadUrl}news/list`,
@@ -135,6 +149,7 @@ const Trinidad = (props) => {
       description: "GET / Optener noticias",
       parameters: [count, from],
       method: "GET",
+      model: "news",
     },
     {
       url: `${config.apiTrinidadUrl}place/list`,
@@ -142,6 +157,7 @@ const Trinidad = (props) => {
       description: "GET / Optener lugares",
       parameters: [count, from, routes, placeTypes],
       method: "GET",
+      model: "place",
     },
     {
       url: `${config.apiTrinidadUrl}place-type/list`,
@@ -149,6 +165,7 @@ const Trinidad = (props) => {
       description: "GET / Optener tipos de lugares",
       parameters: [count, from, places],
       method: "GET",
+      model: "placeType",
     },
     {
       url: `${config.apiTrinidadUrl}review/list`,
@@ -156,6 +173,7 @@ const Trinidad = (props) => {
       description: "GET / Optener comentarios",
       parameters: [places, routes, news, events],
       method: "GET",
+      model: "review",
     },
     {
       url: `${config.apiTrinidadUrl}route/list`,
@@ -163,6 +181,7 @@ const Trinidad = (props) => {
       description: "GET / Optener rutas",
       parameters: [count, from, places],
       method: "GET",
+      model: "route",
     },
     {
       url: `${config.apiTrinidadUrl}survey/list`,
@@ -170,6 +189,7 @@ const Trinidad = (props) => {
       description: "GET / Optener formularios",
       parameters: [count, from],
       method: "GET",
+      model: "survey",
     },
     {
       url: `${config.apiTrinidadUrl}text/get`,
@@ -177,6 +197,7 @@ const Trinidad = (props) => {
       description: "GET / Optener textos",
       parameters: [id],
       method: "GET",
+      model: "text",
     },
   ];
 
@@ -207,12 +228,22 @@ const Trinidad = (props) => {
         content={[
           <SitoContainer flexDirection="column" alignItems="center">
             {getPoints.map((item, i) => (
-              <EndPointCell endPoint={item} key={i} mode={mode} />
+              <EndPointCell
+                endPoint={item}
+                key={i}
+                mode={mode}
+                model={models[item.model]}
+              />
             ))}
           </SitoContainer>,
           <SitoContainer flexDirection="column" alignItems="center">
             {postPoints.map((item, i) => (
-              <EndPointCell endPoint={item} key={i} mode={mode} />
+              <EndPointCell
+                endPoint={item}
+                key={i}
+                mode={mode}
+                model={models[item.model]}
+              />
             ))}
           </SitoContainer>,
         ]}

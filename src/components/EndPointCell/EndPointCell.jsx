@@ -20,6 +20,8 @@ import {
   CardActions,
   Collapse,
   Chip,
+  FormControlLabel,
+  Checkbox,
   Button,
   IconButton,
   Typography,
@@ -50,7 +52,7 @@ import config from "../../config";
 export default function EndPointCell(props) {
   const theme = useTheme();
 
-  const { endPoint, mode } = props;
+  const { endPoint, mode, model } = props;
 
   const { control, reset, handleSubmit, getValues, setValue } = useForm();
 
@@ -332,6 +334,18 @@ export default function EndPointCell(props) {
                   </SitoContainer>
                 </Box>
               )}
+              {item.type === "boolean" && (
+                <Controller
+                  control={control}
+                  name={item.id}
+                  render={({ field }) => (
+                    <FormControlLabel
+                      control={<Checkbox checked={field.value} {...field} />}
+                      label={item.label}
+                    />
+                  )}
+                />
+              )}
             </Box>
           ))}
           <SitoContainer sx={{ width: "100%" }} justifyContent="flex-end">
@@ -359,15 +373,7 @@ export default function EndPointCell(props) {
                     width: "100%",
                   }}
                 >
-                  <ReactJson
-                    {...reactJsonProps}
-                    src={{
-                      root: {
-                        status: 200,
-                        data: [{}],
-                      },
-                    }}
-                  />
+                  <ReactJson {...reactJsonProps} src={model} />
                 </Box>
               </Box>,
               <Box
