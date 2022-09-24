@@ -32,6 +32,9 @@ import {
   AddCircle,
 } from "@mui/icons-material";
 
+// own components
+import TabView from "../../components/TabView/TabView";
+
 export default function EndPointCell(props) {
   const theme = useTheme();
 
@@ -113,18 +116,30 @@ export default function EndPointCell(props) {
     setParameters({ type: "set", parameters: endPoint.parameters });
   }, [endPoint]);
 
+  const [tab, setTab] = useState(0);
+  const handleTab = (e, newTab) => setTab(newTab);
+
+  const getMethodColor = () => {
+    switch (endPoint.method) {
+      case "POST":
+        return theme.palette.info.main;
+      default: //* get
+        return theme.palette.success.main;
+    }
+  };
+
   return (
     <Card sx={{ width: "80%", margin: "1rem 0" }}>
       <CardHeader
         avatar={
           <Box
             sx={{
-              bgcolor: theme.palette.success.main,
+              bgcolor: getMethodColor(),
               padding: "17px 15px",
               borderRadius: "100%",
             }}
           >
-            GET
+            {endPoint.method}
           </Box>
         }
         action={
@@ -228,8 +243,19 @@ export default function EndPointCell(props) {
               Limpiar
             </Button>
           </SitoContainer>
-          <Typography paragraph>Respuesta:</Typography>
-          <Typography paragraph></Typography>
+          <TabView
+            value={tab}
+            onChange={handleTab}
+            tabs={["Respuestas", "Prueba"]}
+            content={[
+              <Box>
+                <Typography paragraph>Respuesta:</Typography>
+              </Box>,
+              <Box>
+                <Typography paragraph>Prueba:</Typography>
+              </Box>,
+            ]}
+          />
         </CardContent>
       </Collapse>
     </Card>
