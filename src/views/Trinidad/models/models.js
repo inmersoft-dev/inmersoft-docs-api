@@ -1,261 +1,108 @@
+const date = "number: date of creation's milliseconds";
+const id = "number: unique id";
+const name = "string: name";
+const description = "string: short description";
+const web = "string: web site";
+const video = "string: web video";
+
+const image = {
+  id: "string: imageKit unique file id",
+  blurHash: "string: blurHash",
+  url: "string: image source url",
+};
+
+const headerImages = [image];
+
+const panoramic = image;
+
+const content = [
+  {
+    value: {
+      content: "string: HTML content",
+    },
+    type: "string: text",
+  },
+  {
+    value: {
+      url: "string: video url",
+    },
+    type: "string: video",
+  },
+  {
+    value: {
+      id: "string: imageKit unique file id",
+      blurHash: "string: blurHash",
+      url: "string: image source url",
+    },
+    type: "string: photo",
+  },
+  {
+    value: {
+      title: "string: accordion title",
+      content: "string: accordion content",
+    },
+    type: "string: accordion",
+  },
+];
+
+const comments = [
+  {
+    comment: "string: customer comment content",
+    stars: "number: stars",
+  },
+];
+
+const placeType = {
+  date,
+  id,
+  name,
+  classification: "boolean[3]: [dónde comer, dónde dormir, experiencia]",
+};
+
+const route = {
+  date,
+  id,
+  name,
+  description,
+  headerImages,
+  activities: "string[]: activities name",
+  web,
+  video,
+  content,
+  comments,
+};
+
+const place = {
+  date,
+  id,
+  name,
+  description,
+  headerImages,
+  panoramic,
+  phone: "string: telephone number",
+  address: "string: address",
+  services: "string[]: services name",
+  socialMedia: "string[]: social media URLs",
+  web,
+  video,
+  latitude: "number",
+  longitude: "number",
+  content,
+  comments,
+};
+
 const models = {
   place: {
     status: "number: 200 - Ok / 422 - not found",
-    data: [
-      {
-        date: "number: date of creation's milliseconds",
-        id: "number: unique id",
-        name: "string: name",
-        description: "string: short description",
-        headerImages: [
-          {
-            id: "string: imageKit unique file id",
-            blurHash: "string: blurHash",
-            url: "string: image source url",
-          },
-        ],
-        panoramic: {
-          id: "string: imageKit unique file id",
-          blurHash: "string: blurHash",
-          url: "string: image source url",
-        },
-        placeType: [
-          {
-            date: "number: date of creation's milliseconds",
-            id: "number: placeType unique id",
-            name: "string: placeType name",
-            classification:
-              "boolean[3]: [dónde comer, dónde dormir, experiencia]",
-          },
-        ],
-        routes: [
-          {
-            date: "number: date of creation's milliseconds",
-            id: "number: unique id",
-            name: "string: route name",
-            description: "string: route short description",
-            headerImages: [
-              {
-                id: "string: imageKit unique file id",
-                blurHash: "string: blurHash",
-                url: "string: image source url",
-              },
-            ],
-            activities: "string[]: activities name",
-            web: "string: route web site",
-            video: "string: route web video",
-            content: [
-              {
-                value: {
-                  content: "string: HTML content",
-                },
-                type: "string: text",
-              },
-              {
-                value: {
-                  url: "string: video url",
-                },
-                type: "string: video",
-              },
-              {
-                value: {
-                  id: "string: imageKit unique file id",
-                  blurHash: "string: blurHash",
-                  url: "string: image source url",
-                },
-                type: "string: photo",
-              },
-              {
-                value: {
-                  title: "string: accordion title",
-                  content: "string: accordion content",
-                },
-                type: "string: accordion",
-              },
-            ],
-            comments: [
-              {
-                comment: "string: customer comment content",
-                stars: "number: stars",
-              },
-            ],
-          },
-        ],
-        phone: "string: telephone number",
-        address: "string: address",
-        services: "string[]: services name",
-        socialMedia: "string[]: social media URLs",
-        web: "string: web site",
-        video: "string: web video",
-        latitude: "number",
-        longitude: "number",
-        content: [
-          {
-            value: {
-              content: "string: HTML content",
-            },
-            type: "string: text",
-          },
-          {
-            value: {
-              url: "string: video url",
-            },
-            type: "string: video",
-          },
-          {
-            value: {
-              id: "string: imageKit unique file id",
-              blurHash: "string: blurHash",
-              url: "string: image source url",
-            },
-            type: "string: photo",
-          },
-          {
-            value: {
-              title: "string: accordion title",
-              content: "string: accordion content",
-            },
-            type: "string: accordion",
-          },
-        ],
-        comments: [
-          {
-            comment: "string: customer comment content",
-            stars: "number: stars",
-          },
-        ],
-      },
-    ],
+    data: [{ ...place, routes: [route], placeType: [placeType] }],
   },
   route: {
     status: "number: 200 - Ok / 422 - not found",
-    data: [
-      {
-        date: "number: date of creation's milliseconds",
-        id: "number: unique id",
-        name: "string: name",
-        description: "string: short description",
-        headerImages: [
-          {
-            id: "string: imageKit unique file id",
-            blurHash: "string: blurHash",
-            url: "string: image source url",
-          },
-        ],
-        panoramic: {
-          id: "string: imageKit unique file id",
-          blurHash: "string: blurHash",
-          url: "string: image source url",
-        },
-        places: [
-          {
-            date: "number: date of creation's milliseconds",
-            id: "number: unique id",
-            name: "string: name",
-            description: "string: short description",
-            headerImages: [
-              {
-                id: "string: imageKit unique file id",
-                blurHash: "string: blurHash",
-                url: "string: image source url",
-              },
-            ],
-            panoramic: {
-              id: "string: imageKit unique file id",
-              blurHash: "string: blurHash",
-              url: "string: image source url",
-            },
-            placeType: [
-              {
-                id: "number: placeType unique id",
-                name: "string: placeType name",
-              },
-            ],
-            phone: "string: telephone number",
-            address: "string: address",
-            services: "string[]: services name",
-            socialMedia: "string[]: social media URLs",
-            web: "string: web site",
-            video: "string: web video",
-            latitude: "number",
-            longitude: "number",
-            content: [
-              {
-                value: {
-                  content: "string: HTML content",
-                },
-                type: "string: text",
-              },
-              {
-                value: {
-                  url: "string: video url",
-                },
-                type: "string: video",
-              },
-              {
-                value: {
-                  id: "string: imageKit unique file id",
-                  blurHash: "string: blurHash",
-                  url: "string: image source url",
-                },
-                type: "string: photo",
-              },
-              {
-                value: {
-                  title: "string: accordion title",
-                  content: "string: accordion content",
-                },
-                type: "string: accordion",
-              },
-            ],
-            comments: [
-              {
-                comment: "string: customer comment content",
-                stars: "number: stars",
-              },
-            ],
-          },
-        ],
-        activities: "string[]: activities name",
-        web: "string: web site",
-        video: "string: web video",
-        content: [
-          {
-            value: {
-              content: "string: HTML content",
-            },
-            type: "string: text",
-          },
-          {
-            value: {
-              url: "string: video url",
-            },
-            type: "string: video",
-          },
-          {
-            value: {
-              id: "string: imageKit unique file id",
-              blurHash: "string: blurHash",
-              url: "string: image source url",
-            },
-            type: "string: photo",
-          },
-          {
-            value: {
-              title: "string: accordion title",
-              content: "string: accordion content",
-            },
-            type: "string: accordion",
-          },
-        ],
-        comments: [
-          {
-            comment: "string: customer comment content",
-            stars: "number: stars",
-          },
-        ],
-      },
-    ],
+    data: [{ ...route, places: [place] }],
+  },
+  placeType: {
+    status: "number: 200 - Ok / 422 - not found",
+    data: [{ ...placeType, places: [place] }],
   },
 };
 
