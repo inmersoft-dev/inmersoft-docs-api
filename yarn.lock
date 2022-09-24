@@ -7440,6 +7440,11 @@ react-is@^18.0.0, react-is@^18.2.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
 
+react-json-viewer@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/react-json-viewer/-/react-json-viewer-3.0.1.tgz#71f10c86b663446cef8effec4257276258b44b9a"
+  integrity sha512-3cOhAiQs29aEO2AvMAZZK0Gowf8zgsdOJP4by3ay70fAmKNvl7Eq4L6+ZQiTjtzePlZfg9X5MdBEgVLsWZuw1w==
+
 react-refresh@^0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.11.0.tgz#77198b944733f0f1f1a90e791de4541f9f074046"

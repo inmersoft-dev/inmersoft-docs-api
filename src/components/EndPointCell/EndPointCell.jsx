@@ -1,5 +1,8 @@
 import { useState, useEffect, useReducer } from "react";
 import { useForm, Controller } from "react-hook-form";
+import JSONViewer from "react-json-viewer";
+
+import axios from "axios";
 
 import PropTypes from "prop-types";
 
@@ -35,6 +38,14 @@ import {
 // own components
 import TabView from "../../components/TabView/TabView";
 
+// cookies
+import { getCookie } from "../../utils/auth";
+
+// auth
+import { getAuth } from "../../auth/auth";
+
+import config from "../../config";
+
 export default function EndPointCell(props) {
   const theme = useTheme();
 
@@ -65,6 +76,7 @@ export default function EndPointCell(props) {
   };
 
   const [parameters, setParameters] = useReducer(parametersReducer, {});
+  const [respond, setRespond] = useState({});
 
   const attributesReducer = (attributesState, action) => {
     const { type } = action;
@@ -100,8 +112,23 @@ export default function EndPointCell(props) {
 
   const handleExpandClick = () => setExpanded(!expanded);
 
-  const onSubmit = (d) => {
+  const onSubmit = async (d) => {
     console.log(d);
+    if (endPoint.method === "GET") {
+      try {
+        const response = await axios.get(endPoint.url, {
+          headers: {
+            ...getAuth,
+            Authorization: `Bearer ${getCookie(config.basicKey)}`,
+          },
+        });
+        const data = await response.data;
+        setRespond(data);
+      } catch (err) {
+        console.log(err);
+        setRespond(err);
+      }
+    }
   };
 
   const addChips = (who) => {
@@ -128,6 +155,15 @@ export default function EndPointCell(props) {
     }
   };
 
+  const getMethodPadding = () => {
+    switch (endPoint.method) {
+      case "POST":
+        return "22px 15px";
+      default: //* get
+        return "17px 15px";
+    }
+  };
+
   return (
     <Card sx={{ width: "80%", margin: "1rem 0" }}>
       <CardHeader
@@ -135,7 +171,7 @@ export default function EndPointCell(props) {
           <Box
             sx={{
               bgcolor: getMethodColor(),
-              padding: "17px 15px",
+              padding: getMethodPadding(),
               borderRadius: "100%",
             }}
           >
@@ -164,7 +200,7 @@ export default function EndPointCell(props) {
           Probar
           {!expanded ? <ExpandMore /> : <ExpandLess />}
         </Button>
-        <IconButton>
+        <IconButton color="primary">
           <Share />
         </IconButton>
       </CardActions>
@@ -253,6 +289,7 @@ export default function EndPointCell(props) {
               </Box>,
               <Box>
                 <Typography paragraph>Prueba:</Typography>
+                <JSONViewer json={respond} />
               </Box>,
             ]}
           />

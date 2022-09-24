@@ -1,18 +1,9 @@
+import { useState } from "react";
+
 import PropTypes from "prop-types";
 
 // sito components
 import SitoContainer from "sito-container";
-
-// services
-import { campaignList } from "./services/campaign/get";
-import { eventList } from "./services/events/get";
-import { newsList } from "./services/news/get";
-import { placeList } from "./services/places/get";
-import { placeTypeList } from "./services/placeTypes/get";
-import { reviewList } from "./services/reviews/get";
-import { routeList } from "./services/routes/get";
-import { surveyList } from "./services/surveys/get";
-import { textList } from "./services/texts/get";
 
 // @mui icons
 import DarkModeIcon from "@mui/icons-material/DarkMode";
@@ -30,11 +21,9 @@ import {
   attributes,
   count,
   events,
-  eventsAttributes,
   from,
   id,
   news,
-  newsAttributes,
   places,
   placesAttributes,
   placeTypes,
@@ -42,14 +31,91 @@ import {
   routes,
   routesAttributes,
 } from "../../utils/inputPrefab";
+import TabView from "../../components/TabView/TabView";
 
 const Trinidad = (props) => {
   const { toggleMode, mode } = props;
 
-  const endPoints = [
+  const [tab, setTab] = useState(0);
+  const handleTab = (e, newTab) => setTab(newTab);
+
+  const postPoints = [
     {
       url: `${config.apiTrinidadUrl}campaign/list`,
-      function: campaignList,
+      lastUpdate: new Date().toLocaleString(),
+      description: "GET / Optener campañas",
+      parameters: [id, count, from, attributes],
+      method: "POST",
+    },
+    {
+      url: `${config.apiTrinidadUrl}event/list`,
+      lastUpdate: new Date().toLocaleString(),
+      description: "GET / Optener eventos",
+      parameters: [id, count, from, attributes],
+      method: "POST",
+    },
+    {
+      url: `${config.apiTrinidadUrl}news/list`,
+      lastUpdate: new Date().toLocaleString(),
+      description: "GET / Optener noticias",
+      parameters: [id, count, from, attributes],
+      method: "POST",
+    },
+    {
+      url: `${config.apiTrinidadUrl}place/list`,
+      lastUpdate: new Date().toLocaleString(),
+      description: "GET / Optener lugares",
+      parameters: [
+        id,
+        count,
+        from,
+        routes,
+        routesAttributes,
+        placeTypes,
+        placeTypesAttributes,
+      ],
+      method: "POST",
+    },
+    {
+      url: `${config.apiTrinidadUrl}place-type/list`,
+      lastUpdate: new Date().toLocaleString(),
+      description: "GET / Optener tipos de lugares",
+      parameters: [id, count, from, places, placesAttributes],
+      method: "POST",
+    },
+    {
+      url: `${config.apiTrinidadUrl}review/list`,
+      lastUpdate: new Date().toLocaleString(),
+      description: "GET / Optener comentarios",
+      parameters: [places, routes, news, events],
+      method: "POST",
+    },
+    {
+      url: `${config.apiTrinidadUrl}route/list`,
+      lastUpdate: new Date().toLocaleString(),
+      description: "GET / Optener rutas",
+      parameters: [id, count, from, places, placesAttributes],
+      method: "POST",
+    },
+    {
+      url: `${config.apiTrinidadUrl}survey/list`,
+      lastUpdate: new Date().toLocaleString(),
+      description: "GET / Optener formularios",
+      parameters: [id, count, from, attributes],
+      method: "POST",
+    },
+    {
+      url: `${config.apiTrinidadUrl}text/list`,
+      lastUpdate: new Date().toLocaleString(),
+      description: "GET / Optener textos",
+      parameters: [id],
+      method: "POST",
+    },
+  ];
+
+  const getPoints = [
+    {
+      url: `${config.apiTrinidadUrl}campaign/list`,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener campañas",
       parameters: [id, count, from],
@@ -57,7 +123,6 @@ const Trinidad = (props) => {
     },
     {
       url: `${config.apiTrinidadUrl}event/list`,
-      function: eventList,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener eventos",
       parameters: [id, count, from],
@@ -65,7 +130,6 @@ const Trinidad = (props) => {
     },
     {
       url: `${config.apiTrinidadUrl}news/list`,
-      function: newsList,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener noticias",
       parameters: [id, count, from],
@@ -73,7 +137,6 @@ const Trinidad = (props) => {
     },
     {
       url: `${config.apiTrinidadUrl}place/list`,
-      function: placeList,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener lugares",
       parameters: [id, count, from, routes, placeTypes],
@@ -81,7 +144,6 @@ const Trinidad = (props) => {
     },
     {
       url: `${config.apiTrinidadUrl}place-type/list`,
-      function: placeTypeList,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener tipos de lugares",
       parameters: [id, count, from, places],
@@ -89,7 +151,6 @@ const Trinidad = (props) => {
     },
     {
       url: `${config.apiTrinidadUrl}review/list`,
-      function: reviewList,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener comentarios",
       parameters: [places, routes, news, events],
@@ -97,7 +158,6 @@ const Trinidad = (props) => {
     },
     {
       url: `${config.apiTrinidadUrl}route/list`,
-      function: routeList,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener rutas",
       parameters: [id, count, from, places],
@@ -105,7 +165,6 @@ const Trinidad = (props) => {
     },
     {
       url: `${config.apiTrinidadUrl}survey/list`,
-      function: surveyList,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener formularios",
       parameters: [id, count, from],
@@ -113,7 +172,6 @@ const Trinidad = (props) => {
     },
     {
       url: `${config.apiTrinidadUrl}text/list`,
-      function: textList,
       lastUpdate: new Date().toLocaleString(),
       description: "GET / Optener textos",
       parameters: [id],
@@ -141,9 +199,23 @@ const Trinidad = (props) => {
           icon={mode ? <DarkModeIcon /> : <LightModeIcon />}
         />
       </Tooltip>
-      {endPoints.map((item, i) => (
-        <EndPointCell endPoint={item} key={i} />
-      ))}
+      <TabView
+        value={tab}
+        onChange={handleTab}
+        tabs={["GET", "POST"]}
+        content={[
+          <SitoContainer flexDirection="column" alignItems="center">
+            {getPoints.map((item, i) => (
+              <EndPointCell endPoint={item} key={i} />
+            ))}
+          </SitoContainer>,
+          <SitoContainer flexDirection="column" alignItems="center">
+            {postPoints.map((item, i) => (
+              <EndPointCell endPoint={item} key={i} />
+            ))}
+          </SitoContainer>,
+        ]}
+      />
     </SitoContainer>
   );
 };
