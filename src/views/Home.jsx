@@ -66,7 +66,7 @@ function Home(props) {
           <Link id="trinidad" href="/#/trinidad">
             Descubre Trinidad
           </Link>
-          <LinkButton link="trinidad" />
+          <LinkButton link="#/indexes/#trinidad" />
           <Chip
             sx={{ marginLeft: "20px" }}
             label={states[trinidadState]}

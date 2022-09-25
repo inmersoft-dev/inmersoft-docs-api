@@ -14,7 +14,7 @@ const LinkButton = (props) => {
   const [show, setShow] = useState(false);
 
   return (
-    <Link underline="none" href={`#/indexes/#${link}`}>
+    <Link underline="none" href={link}>
       <Button
         sx={{
           width: "30px",
