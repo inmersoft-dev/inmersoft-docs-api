@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import axios from "axios";
 
@@ -15,10 +15,10 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 
 // own components
+import LinkButton from "../components/LinkButton/LinkButton";
 import RadialButton from "../components/RadialButton/RadialButton";
 
 import config from "../config";
-import { useEffect } from "react";
 
 function Home(props) {
   const { toggleMode, mode } = props;
@@ -63,7 +63,10 @@ function Home(props) {
       <Typography variant="h3">Lista de APIs</Typography>
       <List>
         <ListItem>
-          <Link href="/#/trinidad">Descubre Trinidad</Link>
+          <Link id="trinidad" href="/#/trinidad">
+            Descubre Trinidad
+          </Link>
+          <LinkButton link="trinidad" />
           <Chip
             sx={{ marginLeft: "20px" }}
             label={states[trinidadState]}
