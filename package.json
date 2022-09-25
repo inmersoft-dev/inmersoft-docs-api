@@ -10,6 +10,7 @@
     "@mui/styled-engine-sc": "^5.10.6",
     "axios": "^0.27.2",
     "env-cmd": "^10.1.0",
+    "gh-pages": "^4.0.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-cool-onclickoutside": "^1.7.0",
@@ -26,7 +27,9 @@
     "start": "env-cmd -f .env react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
