@@ -7,7 +7,7 @@ import logo from "./logo.svg";
 import { ThemeProvider, CssBaseline, Box, Tooltip, Link } from "@mui/material";
 
 // routes
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // own components
 import Notification from "./components/Notification/Notification";
@@ -44,7 +44,7 @@ function App() {
     <ThemeProvider theme={mode ? light : dark}>
       <CssBaseline />
       <Notification />
-      <HashRouter basename={process.env.PUBLIC_URL}>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route
             path="/"
@@ -69,7 +69,7 @@ function App() {
                   <p>
                     Presiona <u>comenzar</u> para ir al Índice
                   </p>
-                  <Link className="App-link" href="/#/indexes">
+                  <Link className="App-link" href="/indexes">
                     Comenzar
                   </Link>
                 </header>
@@ -89,7 +89,7 @@ function App() {
             element={<NotFound toggleMode={toggleMode} mode={mode} />}
           />
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }

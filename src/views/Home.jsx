@@ -63,10 +63,10 @@ function Home(props) {
       <Typography variant="h3">Lista de APIs</Typography>
       <List>
         <ListItem>
-          <Link id="trinidad" href="/#/trinidad">
+          <Link id="trinidad" href="/trinidad">
             Descubre Trinidad
           </Link>
-          <LinkButton link="#/indexes/#trinidad" />
+          <LinkButton link="/indexes/#trinidad" />
           <Chip
             sx={{ marginLeft: "20px" }}
             label={states[trinidadState]}
