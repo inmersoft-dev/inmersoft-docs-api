@@ -23,6 +23,11 @@ const dark = createTheme({
       dark: "#aa2e25",
       contrastText: "#ffffff",
     },
+    disabled: {
+      dark: "#9a9a9a",
+      main: "#c3c3c3",
+      light: "#e3e3e3",
+    },
     warning: {
       main: "#ff9800",
       light: "#ffac33",

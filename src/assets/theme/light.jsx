@@ -17,6 +17,11 @@ const light = createTheme({
       dark: "#405163",
       contrastText: "#ffffff",
     },
+    disabled: {
+      dark: "#9a9a9a",
+      main: "#c3c3c3",
+      light: "#e3e3e3",
+    },
     error: {
       main: "#f44336",
       light: "#f6685e",

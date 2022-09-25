@@ -39,6 +39,7 @@ import {
 
 // own components
 import TabView from "../../components/TabView/TabView";
+import LinkButton from "../LinkButton/LinkButton";
 import Loading from "../Loading/Loading";
 
 // cookies
@@ -252,7 +253,12 @@ export default function EndPointCell(props) {
             <MoreVert />
           </IconButton>
         }
-        title={endPoint.url}
+        title={
+          <Box>
+            {endPoint.url}
+            <LinkButton link="#/indexes/#trinidad" />
+          </Box>
+        }
         subheader={endPoint.lastUpdate}
       />
       <CardContent>

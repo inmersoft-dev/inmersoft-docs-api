@@ -10,12 +10,9 @@ import { Typography, Button } from "@mui/material";
 // sito components
 import SitoContainer from "sito-container";
 
-// contexts
-import { useLanguage } from "context/LanguageProvider";
-
 const Error = (props) => {
   const { onAction } = props;
-  const { languageState } = useLanguage();
+
   return (
     <SitoContainer
       alignItems="center"
@@ -25,11 +22,11 @@ const Error = (props) => {
     >
       <ErrorOutlineIcon color="error" sx={{ fontSize: "4rem" }} />
       <Typography color="error" variant="h4">
-        {languageState.texts.Messages.Error}
+        Ha ocurrido un error
       </Typography>
       {onAction && (
         <Button type="submit" onClick={onAction} sx={{ marginTop: "20px" }}>
-          {languageState.texts.Details.Buttons.Retry}
+          Reintentar
         </Button>
       )}
     </SitoContainer>

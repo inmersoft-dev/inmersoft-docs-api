@@ -22,7 +22,7 @@ const LinkButton = (props) => {
           minWidth: 0,
           minHeight: 0,
           padding: "10px",
-          marginLeft: "20px",
+          marginLeft: "10px",
         }}
         onMouseEnter={() => setShow(true)}
         onMouseLeave={() => setShow(false)}
