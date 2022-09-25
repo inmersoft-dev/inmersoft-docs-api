@@ -1,10 +1,14 @@
+import { useState } from "react";
+
+import axios from "axios";
+
 import PropTypes from "prop-types";
 
 // sito components
 import SitoContainer from "sito-container";
 
 // @mui components
-import { Tooltip, List, ListItem, Link, Typography } from "@mui/material";
+import { Tooltip, List, ListItem, Chip, Link, Typography } from "@mui/material";
 
 // @mui icons
 import DarkModeIcon from "@mui/icons-material/DarkMode";
@@ -13,8 +17,32 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 // own components
 import RadialButton from "../components/RadialButton/RadialButton";
 
+import config from "../config";
+import { useEffect } from "react";
+
 function Home(props) {
   const { toggleMode, mode } = props;
+
+  const [trinidadState, setTrinidadState] = useState("success");
+
+  const validateTrinidad = async () => {
+    try {
+      await axios.get(`${config.apiTrinidadUrl}docs`);
+      setTrinidadState("success");
+    } catch (err) {
+      console.log(err);
+      setTrinidadState("error");
+    }
+  };
+
+  const states = {
+    success: "ONLINE",
+    error: "OFFLINE",
+  };
+
+  useEffect(() => {
+    validateTrinidad();
+  }, []);
 
   return (
     <SitoContainer flexDirection="column" sx={{ padding: "1rem" }}>
@@ -36,6 +64,12 @@ function Home(props) {
       <List>
         <ListItem>
           <Link href="/#/trinidad">Descubre Trinidad</Link>
+          <Chip
+            sx={{ marginLeft: "20px" }}
+            label={states[trinidadState]}
+            color={trinidadState}
+            size="small"
+          />
         </ListItem>
       </List>
     </SitoContainer>
