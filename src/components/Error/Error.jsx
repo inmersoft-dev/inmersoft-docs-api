@@ -25,7 +25,12 @@ const Error = (props) => {
         Ha ocurrido un error
       </Typography>
       {onAction && (
-        <Button type="submit" onClick={onAction} sx={{ marginTop: "20px" }}>
+        <Button
+          variant="contained"
+          type="submit"
+          onClick={onAction}
+          sx={{ marginTop: "20px" }}
+        >
           Reintentar
         </Button>
       )}

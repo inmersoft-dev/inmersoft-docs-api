@@ -23,12 +23,6 @@ import TabView from "../../components/TabView/TabView";
 import Error from "../../components/Error/Error";
 import Empty from "../../components/Empty/Empty";
 
-// models
-import models from "./models/models";
-
-// contexts
-import { useNotification } from "../../contexts/NotificationProvider";
-
 // config
 import config from "../../config";
 
@@ -43,10 +37,9 @@ const Trinidad = (props) => {
 
   const [getPoints, setGetPoints] = useState([]);
   const [postPoints, setPostPoints] = useState([]);
+  const [models, setModels] = useState([]);
 
   const [loading, setLoading] = useState(true);
-
-  const { setNotificationState } = useNotification();
 
   const fetch = async () => {
     setLoading(true);
@@ -55,15 +48,12 @@ const Trinidad = (props) => {
       const data = await response.data;
       setGetPoints(data.getPoints);
       setPostPoints(data.postPoints);
+      setModels(data.models);
     } catch (err) {
       setGetPoints(-1);
       setPostPoints(-1);
+      setModels(-1);
       console.log(err);
-      setNotificationState({
-        type: "show",
-        ntype: "error",
-        message: "No se ha podido conectar",
-      });
     }
     setLoading(false);
   };
@@ -116,15 +106,16 @@ const Trinidad = (props) => {
               {getPoints.length === 0 && <Empty />}
             </SitoContainer>,
             <SitoContainer flexDirection="column" alignItems="center">
-              {postPoints.map((item, i) => (
-                <EndPointCell
-                  endPoint={item}
-                  key={i}
-                  mode={mode}
-                  model={models[item.model]}
-                  parent={config.apiTrinidadUrl}
-                />
-              ))}
+              {postPoints.length > 0 &&
+                postPoints.map((item, i) => (
+                  <EndPointCell
+                    endPoint={item}
+                    key={i}
+                    mode={mode}
+                    model={models[item.model]}
+                    parent={config.apiTrinidadUrl}
+                  />
+                ))}
               {getPoints === -1 && <Error onAction={retry} />}
               {getPoints.length === 0 && <Empty />}
             </SitoContainer>,

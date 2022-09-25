@@ -403,15 +403,15 @@ const EndPointCell = (props) => {
                   width: "100%",
                 }}
               >
+                <Typography paragraph>Prueba:</Typography>
                 <Loading
                   visible={loadingState}
                   sx={{
                     width: "100%",
                     height: "100%",
-                    position: loadingState ? "relative" : "absolute",
+                    position: "relative",
                   }}
                 />
-                <Typography paragraph>Prueba:</Typography>
                 {!loadingState && (
                   <Box>
                     <ReactJson {...reactJsonProps} src={respond} />
