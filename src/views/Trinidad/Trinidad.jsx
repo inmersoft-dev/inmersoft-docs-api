@@ -18,6 +18,7 @@ import { Tooltip } from "@mui/material";
 // own components
 import EndPointCell from "../../components/EndPointCell/EndPointCell";
 import RadialButton from "../../components/RadialButton/RadialButton";
+import BigLoading from "../../components/BigLoading/BigLoading";
 import TabView from "../../components/TabView/TabView";
 import Error from "../../components/Error/Error";
 import Empty from "../../components/Empty/Empty";
@@ -31,6 +32,9 @@ import { useNotification } from "../../contexts/NotificationProvider";
 // config
 import config from "../../config";
 
+// images
+import trinidad from "../../assets/images/trinidad.webp";
+
 const Trinidad = (props) => {
   const { toggleMode, mode } = props;
 
@@ -40,9 +44,12 @@ const Trinidad = (props) => {
   const [getPoints, setGetPoints] = useState([]);
   const [postPoints, setPostPoints] = useState([]);
 
+  const [loading, setLoading] = useState(true);
+
   const { setNotificationState } = useNotification();
 
   const fetch = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(`${config.apiTrinidadUrl}docs/fetch`);
       const data = await response.data;
@@ -58,6 +65,7 @@ const Trinidad = (props) => {
         message: "No se ha podido conectar",
       });
     }
+    setLoading(false);
   };
 
   const retry = () => fetch();
@@ -86,38 +94,43 @@ const Trinidad = (props) => {
           icon={mode ? <DarkModeIcon /> : <LightModeIcon />}
         />
       </Tooltip>
-      <TabView
-        value={tab}
-        onChange={handleTab}
-        tabs={["GET", "POST"]}
-        content={[
-          <SitoContainer flexDirection="column" alignItems="center">
-            {getPoints.length > 0 &&
-              getPoints.map((item, i) => (
+      <BigLoading visible={loading} logo={trinidad} />
+      {!loading && (
+        <TabView
+          value={tab}
+          onChange={handleTab}
+          tabs={["GET", "POST"]}
+          content={[
+            <SitoContainer flexDirection="column" alignItems="center">
+              {getPoints.length > 0 &&
+                getPoints.map((item, i) => (
+                  <EndPointCell
+                    endPoint={item}
+                    key={i}
+                    mode={mode}
+                    model={models[item.model]}
+                    parent={config.apiTrinidadUrl}
+                  />
+                ))}
+              {getPoints === -1 && <Error onAction={retry} />}
+              {getPoints.length === 0 && <Empty />}
+            </SitoContainer>,
+            <SitoContainer flexDirection="column" alignItems="center">
+              {postPoints.map((item, i) => (
                 <EndPointCell
                   endPoint={item}
                   key={i}
                   mode={mode}
                   model={models[item.model]}
+                  parent={config.apiTrinidadUrl}
                 />
               ))}
-            {getPoints === -1 && <Error onAction={retry} />}
-            {getPoints.length === 0 && <Empty />}
-          </SitoContainer>,
-          <SitoContainer flexDirection="column" alignItems="center">
-            {postPoints.map((item, i) => (
-              <EndPointCell
-                endPoint={item}
-                key={i}
-                mode={mode}
-                model={models[item.model]}
-              />
-            ))}
-            {getPoints === -1 && <Error onAction={retry} />}
-            {getPoints.length === 0 && <Empty />}
-          </SitoContainer>,
-        ]}
-      />
+              {getPoints === -1 && <Error onAction={retry} />}
+              {getPoints.length === 0 && <Empty />}
+            </SitoContainer>,
+          ]}
+        />
+      )}
     </SitoContainer>
   );
 };

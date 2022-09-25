@@ -50,10 +50,10 @@ import { getAuth } from "../../auth/auth";
 
 import config from "../../config";
 
-export default function EndPointCell(props) {
+const EndPointCell = (props) => {
   const theme = useTheme();
 
-  const { endPoint, mode, model } = props;
+  const { endPoint, mode, model, parent } = props;
 
   const { control, reset, handleSubmit, getValues, setValue } = useForm();
 
@@ -134,7 +134,7 @@ export default function EndPointCell(props) {
             }
           });
           const response = await axios.post(
-            endPoint.url,
+            `${parent}${endPoint.url}`,
             {
               ...d,
               ...postAttributes,
@@ -163,7 +163,7 @@ export default function EndPointCell(props) {
             }
           });
           const response = await axios.get(
-            `${endPoint.url}?${queryParameters}`,
+            `${parent}${endPoint.url}?${queryParameters}`,
             {
               headers: {
                 ...getAuth,
@@ -409,9 +409,12 @@ export default function EndPointCell(props) {
       </Collapse>
     </Card>
   );
-}
+};
 
 EndPointCell.propTypes = {
   endPoint: PropTypes.object.isRequired,
   mode: PropTypes.bool.isRequired,
+  parent: PropTypes.string.isRequired,
 };
+
+export default EndPointCell;

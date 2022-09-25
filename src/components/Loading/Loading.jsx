@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 // @mui components
 import { Box, CircularProgress } from "@mui/material/";
 
-export default function Loading(props) {
+const Loading = (props) => {
   const { visible, sx } = props;
   return (
     <Box
@@ -19,7 +19,7 @@ export default function Loading(props) {
       <CircularProgress />
     </Box>
   );
-}
+};
 
 Loading.defaultProps = {
   sx: {},
@@ -29,3 +29,5 @@ Loading.propTypes = {
   visible: PropTypes.bool.isRequired,
   sx: PropTypes.object,
 };
+
+export default Loading;
