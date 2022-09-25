@@ -39,6 +39,7 @@ import {
 
 // own components
 import TabView from "../../components/TabView/TabView";
+import ActionMenu from "../ActionMenu/ActionMenu";
 import LinkButton from "../LinkButton/LinkButton";
 import Loading from "../Loading/Loading";
 
@@ -234,8 +235,22 @@ const EndPointCell = (props) => {
     iconStyle: "triangle",
   };
 
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [open, setOpen] = useState(false);
+  const handleCloseMenu = () => setOpen(false);
+  const openActionMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+    setOpen(!open);
+  };
+
   return (
     <Card sx={{ width: "80%", margin: "1rem 0" }}>
+      <ActionMenu
+        visible={open}
+        anchor={anchorEl}
+        handleClose={handleCloseMenu}
+        who={encodeURIComponent(endPoint.link)}
+      />
       <CardHeader
         avatar={
           <Box
@@ -249,7 +264,7 @@ const EndPointCell = (props) => {
           </Box>
         }
         action={
-          <IconButton aria-label="settings">
+          <IconButton color="primary" onClick={openActionMenu}>
             <MoreVert />
           </IconButton>
         }
