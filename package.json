@@ -1,7 +1,7 @@
 {
   "name": "inmersoft-docs-api",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@emotion/css": "^11.10.0",
     "@emotion/react": "^11.10.4",
