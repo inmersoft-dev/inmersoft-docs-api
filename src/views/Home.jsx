@@ -56,7 +56,6 @@ const Home = () => {
           />
         </ListItem>
       </List>
-      <Empty />
     </SitoContainer>
   );
 };
