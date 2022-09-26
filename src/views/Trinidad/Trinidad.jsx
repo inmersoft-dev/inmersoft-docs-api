@@ -9,16 +9,8 @@ import PropTypes from "prop-types";
 // sito components
 import SitoContainer from "sito-container";
 
-// @mui icons
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import LightModeIcon from "@mui/icons-material/LightMode";
-
-// @mui components
-import { Tooltip } from "@mui/material";
-
 // own components
 import EndPointCell from "../../components/EndPointCell/EndPointCell";
-import RadialButton from "../../components/RadialButton/RadialButton";
 import BigLoading from "../../components/BigLoading/BigLoading";
 import TabView from "../../components/TabView/TabView";
 import Error from "../../components/Error/Error";
@@ -31,7 +23,7 @@ import config from "../../config";
 import trinidad from "../../assets/images/trinidad.webp";
 
 const Trinidad = (props) => {
-  const { toggleMode, mode } = props;
+  const { mode } = props;
   const location = useLocation();
 
   const [tab, setTab] = useState(0);
@@ -85,22 +77,8 @@ const Trinidad = (props) => {
     <SitoContainer
       alignItems="center"
       flexDirection="column"
-      sx={{ width: "100%" }}
+      sx={{ width: "100%", paddingTop: "64px" }}
     >
-      <Tooltip title={mode ? "Modo Oscuro" : "Modo Claro"}>
-        <RadialButton
-          sx={{
-            marginTop: 0,
-            position: "fixed",
-            top: "20px",
-            right: "20px",
-            zIndex: 20,
-            transition: "top 500ms ease",
-          }}
-          onClick={toggleMode}
-          icon={mode ? <DarkModeIcon /> : <LightModeIcon />}
-        />
-      </Tooltip>
       <BigLoading visible={loading} logo={trinidad} />
       {!loading && (
         <TabView

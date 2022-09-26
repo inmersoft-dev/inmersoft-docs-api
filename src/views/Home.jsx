@@ -8,21 +8,14 @@ import PropTypes from "prop-types";
 import SitoContainer from "sito-container";
 
 // @mui components
-import { Tooltip, List, ListItem, Chip, Link, Typography } from "@mui/material";
-
-// @mui icons
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import LightModeIcon from "@mui/icons-material/LightMode";
+import { List, ListItem, Chip, Link, Typography } from "@mui/material";
 
 // own components
 import LinkButton from "../components/LinkButton/LinkButton";
-import RadialButton from "../components/RadialButton/RadialButton";
 
 import config from "../config";
 
 function Home(props) {
-  const { toggleMode, mode } = props;
-
   const [trinidadState, setTrinidadState] = useState("success");
 
   const validateTrinidad = async () => {
@@ -45,21 +38,10 @@ function Home(props) {
   }, []);
 
   return (
-    <SitoContainer flexDirection="column" sx={{ padding: "1rem" }}>
-      <Tooltip title={mode ? "Modo Oscuro" : "Modo Claro"}>
-        <RadialButton
-          sx={{
-            marginTop: 0,
-            position: "fixed",
-            top: "20px",
-            right: "20px",
-            zIndex: 20,
-            transition: "top 500ms ease",
-          }}
-          onClick={toggleMode}
-          icon={mode ? <DarkModeIcon /> : <LightModeIcon />}
-        />
-      </Tooltip>
+    <SitoContainer
+      flexDirection="column"
+      sx={{ padding: "1rem", paddingTop: "64px" }}
+    >
       <Typography variant="h3">Lista de APIs</Typography>
       <List>
         <ListItem>

@@ -133,6 +133,7 @@ const light = createTheme({
       fontWeight: 500,
       lineHeight: 1.75,
       letterSpacing: "0.02em",
+      textTransform: "capitalize",
     },
     caption: {
       fontSize: "0.8rem",
