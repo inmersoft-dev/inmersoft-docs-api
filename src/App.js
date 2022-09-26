@@ -48,7 +48,6 @@ function App() {
         <Routes>
           <Route
             path="/"
-            index
             element={
               <Box className="App">
                 <Tooltip title={mode ? "Modo Oscuro" : "Modo Claro"}>
