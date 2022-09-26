@@ -40,7 +40,7 @@ function Home(props) {
   return (
     <SitoContainer
       flexDirection="column"
-      sx={{ padding: "1rem", paddingTop: "64px" }}
+      sx={{ padding: "100px 24px 100px 24px" }}
     >
       <Typography variant="h3">Lista de APIs</Typography>
       <List>
