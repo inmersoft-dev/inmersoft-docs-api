@@ -117,7 +117,7 @@ const Trinidad = (props) => {
                         key={i}
                         mode={mode}
                         model={webModels[item.model]}
-                        parent={config.apiTrinidadUrl}
+                        parent={config.apiTrinidadWebUrl}
                       />
                     ))}
                   {webGetPoints === -1 && <Error onAction={retry} />}
@@ -131,7 +131,7 @@ const Trinidad = (props) => {
                         key={i}
                         mode={mode}
                         model={webModels[item.model]}
-                        parent={config.apiTrinidadUrl}
+                        parent={config.apiTrinidadWebUrl}
                       />
                     ))}
                   {webGetPoints === -1 && <Error onAction={retry} />}
@@ -152,7 +152,7 @@ const Trinidad = (props) => {
                         key={i}
                         mode={mode}
                         model={mobileModels[item.model]}
-                        parent={config.apiTrinidadUrl}
+                        parent={config.apiTrinidadMobileUrl}
                       />
                     ))}
                   {mobileGetPoints === -1 && <Error onAction={retry} />}
@@ -166,7 +166,7 @@ const Trinidad = (props) => {
                         key={i}
                         mode={mode}
                         model={mobileModels[item.model]}
-                        parent={config.apiTrinidadUrl}
+                        parent={config.apiTrinidadMobileUrl}
                       />
                     ))}
                   {mobileGetPoints === -1 && <Error onAction={retry} />}

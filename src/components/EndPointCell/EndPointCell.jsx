@@ -314,6 +314,7 @@ const EndPointCell = (props) => {
                   render={({ field }) => (
                     <TextField
                       label={item.label}
+                      required={item.required}
                       type="number"
                       sx={{ width: "100%" }}
                       {...field}
