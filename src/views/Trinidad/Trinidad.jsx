@@ -41,7 +41,6 @@ const Trinidad = (props) => {
     const { hash } = location;
     if (hash && hash.length) {
       const parsedHash = hash.substring(1);
-      console.log(parsedHash);
       switch (parsedHash) {
         case "POST":
           setTab(1);

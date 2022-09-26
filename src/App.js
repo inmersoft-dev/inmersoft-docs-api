@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 // images
 import logo from "./logo.svg";
@@ -36,10 +36,6 @@ function App() {
   const [mode, setMode] = useState(false);
 
   const toggleMode = () => setMode(!mode);
-
-  useEffect(() => {
-    console.log(mode);
-  }, [mode]);
 
   return (
     <ThemeProvider theme={mode ? light : dark}>
