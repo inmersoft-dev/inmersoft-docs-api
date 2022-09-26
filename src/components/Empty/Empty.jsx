@@ -6,13 +6,12 @@ import PropTypes from "prop-types";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 
 // @mui components
-import { useTheme, Typography, Button } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 
 // sito components
 import SitoContainer from "sito-container";
 
 const Empty = (props) => {
-  const theme = useTheme();
   const { onAction, sx, icon } = props;
 
   return (
@@ -23,15 +22,19 @@ const Empty = (props) => {
       flexDirection="column"
     >
       {icon}
-      <Typography variant="h4" sx={{ color: theme.palette.disabled.main }}>
+      <Typography
+        sx={{ marginTop: "15px" }}
+        color="inherit"
+        variant="subtitle1"
+      >
         No hay resultados
       </Typography>
       {onAction && (
         <Button
+          color="inherit"
           type="submit"
           onClick={onAction}
-          variant="contained"
-          sx={{ marginTop: "10px" }}
+          sx={{ marginTop: "15px" }}
         >
           Insertar
         </Button>
@@ -43,7 +46,7 @@ const Empty = (props) => {
 Empty.defaultProps = {
   onAction: undefined,
   sx: {},
-  icon: <ReceiptLongIcon color="secondary" sx={{ fontSize: "4rem" }} />,
+  icon: <ReceiptLongIcon color="secondary" size="large" />,
   title: undefined,
   button: undefined,
 };

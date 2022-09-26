@@ -2,7 +2,8 @@
 import PropTypes from "prop-types";
 
 // @mui icons
-import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import ErrorIcon from "@mui/icons-material/Error";
+import ReplayIcon from "@mui/icons-material/Replay";
 
 // @mui components
 import { Typography, Button } from "@mui/material";
@@ -20,17 +21,22 @@ const Error = (props) => {
       sx={{ width: "100%", height: "500px" }}
       flexDirection="column"
     >
-      <ErrorOutlineIcon color="error" sx={{ fontSize: "4rem" }} />
-      <Typography color="error" variant="h4">
+      <ErrorIcon size="large" color="error" />
+      <Typography
+        sx={{ marginTop: "15px" }}
+        color="inherit"
+        variant="subtitle1"
+      >
         Ha ocurrido un error
       </Typography>
       {onAction && (
         <Button
-          variant="contained"
+          color="inherit"
           type="submit"
           onClick={onAction}
-          sx={{ marginTop: "20px" }}
+          sx={{ marginTop: "15px" }}
         >
+          <ReplayIcon sx={{ marginRight: "15px" }} />
           Reintentar
         </Button>
       )}
