@@ -99,10 +99,7 @@ const AppBar = (props) => {
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-              />
+              <StyledInputBase placeholder="Buscar…" />
             </Search>
           </Box>
         </Toolbar>
