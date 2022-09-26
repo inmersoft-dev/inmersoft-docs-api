@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import PropTypes from "prop-types";
 
 // @mui components
@@ -22,13 +24,31 @@ import HomeIcon from "@mui/icons-material/Home";
 // sito components
 import SitoContainer from "sito-container";
 
+// own components
+import Drawer from "../Drawer/Drawer";
+
 // local style
 import { Search, StyledInputBase, SearchIconWrapper } from "./style";
 
 const AppBar = (props) => {
   const { toggleMode, mode } = props;
+
+  const [showDrawer, setShowDrawer] = useState(false);
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setShowDrawer(open);
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
+      <Drawer state={showDrawer} toggleDrawer={toggleDrawer} />
       <MUIAppBar position="fixed">
         <Toolbar
           sx={{
@@ -43,14 +63,15 @@ const AppBar = (props) => {
               edge="start"
               color="inherit"
               sx={{ mr: 2, display: { md: "none", sm: "inherit" } }}
+              onClick={() => toggleDrawer("left", true)}
             >
               <MenuIcon />
             </IconButton>
             <Typography variant="h4">Inmersoft-Docs-APIs</Typography>
           </SitoContainer>
-          <SitoContainer>
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <Tooltip title="Ir al Inicio">
-              <Link color="inherit" to={`${process.env.PUBLIC_URL}/`}>
+              <Link color="inherit" href={`${process.env.PUBLIC_URL}/`}>
                 <IconButton>
                   <HomeIcon />
                 </IconButton>
@@ -83,7 +104,7 @@ const AppBar = (props) => {
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>
-          </SitoContainer>
+          </Box>
         </Toolbar>
       </MUIAppBar>
     </Box>
