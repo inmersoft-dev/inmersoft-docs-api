@@ -1,6 +1,6 @@
 {
   "name": "inmersoft-docs-api",
-  "version": "0.4.6",
+  "version": "0.4.9",
   "private": false,
   "homepage": "https://inmersot-dev.github.io/inmersoft-docs-api/",
   "dependencies": {
