@@ -15,8 +15,8 @@ jobs:
 
       - name: Build
         run: |
-          npm install
-          npm run-script build
+          yarn install
+          yarn build
         env:
           REACT_APP_API_URL: ${{ secrets.REACT_APP_API_TRINIDAD_URL }}
 
