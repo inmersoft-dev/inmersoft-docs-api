@@ -46,7 +46,7 @@ const Empty = (props) => {
 Empty.defaultProps = {
   onAction: undefined,
   sx: {},
-  icon: <ReceiptLongIcon color="secondary" size="large" />,
+  icon: <ReceiptLongIcon color="inherit" size="large" />,
   title: undefined,
   button: undefined,
 };

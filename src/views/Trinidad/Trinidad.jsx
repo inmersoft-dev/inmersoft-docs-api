@@ -44,9 +44,12 @@ const Trinidad = (props) => {
     }
   }, [location]);
 
-  const [getPoints, setGetPoints] = useState([]);
-  const [postPoints, setPostPoints] = useState([]);
-  const [models, setModels] = useState([]);
+  const [webGetPoints, setWebGetPoints] = useState([]);
+  const [webPostPoints, setWebPostPoints] = useState([]);
+  const [mobileGetPoints, setMobileGetPoints] = useState([]);
+  const [mobilePostPoints, setMobilePostPoints] = useState([]);
+  const [webModels, setWebModels] = useState([]);
+  const [mobileModels, setMobileModels] = useState([]);
 
   const [loading, setLoading] = useState(true);
 
@@ -55,13 +58,20 @@ const Trinidad = (props) => {
     try {
       const response = await axios.get(`${config.apiTrinidadUrl}docs/fetch`);
       const data = await response.data;
-      setGetPoints(data.getPoints);
-      setPostPoints(data.postPoints);
-      setModels(data.models);
+      console.log("data", data);
+      setWebGetPoints(data.webGetPoints);
+      setMobileGetPoints(data.mobileGetPoints);
+      setWebPostPoints(data.webPostPoints);
+      setMobilePostPoints(data.mobilePostPoints);
+      setWebModels(data.webModels);
+      setMobileModels(data.mobileModels);
     } catch (err) {
-      setGetPoints(-1);
-      setPostPoints(-1);
-      setModels(-1);
+      setWebGetPoints(-1);
+      setWebPostPoints(-1);
+      setWebModels(-1);
+      setWebGetPoints(-1);
+      setWebPostPoints(-1);
+      setWebModels(-1);
       console.log(err);
     }
     setLoading(false);
@@ -100,36 +110,70 @@ const Trinidad = (props) => {
               tabs={["GET", "POST"]}
               content={[
                 <SitoContainer flexDirection="column" alignItems="center">
-                  {getPoints.length > 0 &&
-                    getPoints.map((item, i) => (
+                  {webGetPoints.length > 0 &&
+                    webGetPoints.map((item, i) => (
                       <EndPointCell
                         endPoint={item}
                         key={i}
                         mode={mode}
-                        model={models[item.model]}
+                        model={webModels[item.model]}
                         parent={config.apiTrinidadUrl}
                       />
                     ))}
-                  {getPoints === -1 && <Error onAction={retry} />}
-                  {getPoints.length === 0 && <Empty />}
+                  {webGetPoints === -1 && <Error onAction={retry} />}
+                  {webGetPoints.length === 0 && <Empty />}
                 </SitoContainer>,
                 <SitoContainer flexDirection="column" alignItems="center">
-                  {postPoints.length > 0 &&
-                    postPoints.map((item, i) => (
+                  {webPostPoints.length > 0 &&
+                    webPostPoints.map((item, i) => (
                       <EndPointCell
                         endPoint={item}
                         key={i}
                         mode={mode}
-                        model={models[item.model]}
+                        model={webModels[item.model]}
                         parent={config.apiTrinidadUrl}
                       />
                     ))}
-                  {getPoints === -1 && <Error onAction={retry} />}
-                  {getPoints.length === 0 && <Empty />}
+                  {webGetPoints === -1 && <Error onAction={retry} />}
+                  {webGetPoints.length === 0 && <Empty />}
                 </SitoContainer>,
               ]}
             />,
-            <></>,
+            <TabView
+              value={tab}
+              onChange={handleTab}
+              tabs={["GET", "POST"]}
+              content={[
+                <SitoContainer flexDirection="column" alignItems="center">
+                  {mobileGetPoints.length > 0 &&
+                    mobileGetPoints.map((item, i) => (
+                      <EndPointCell
+                        endPoint={item}
+                        key={i}
+                        mode={mode}
+                        model={mobileModels[item.model]}
+                        parent={config.apiTrinidadUrl}
+                      />
+                    ))}
+                  {mobileGetPoints === -1 && <Error onAction={retry} />}
+                  {mobileGetPoints.length === 0 && <Empty />}
+                </SitoContainer>,
+                <SitoContainer flexDirection="column" alignItems="center">
+                  {mobilePostPoints.length > 0 &&
+                    mobilePostPoints.map((item, i) => (
+                      <EndPointCell
+                        endPoint={item}
+                        key={i}
+                        mode={mode}
+                        model={mobileModels[item.model]}
+                        parent={config.apiTrinidadUrl}
+                      />
+                    ))}
+                  {mobileGetPoints === -1 && <Error onAction={retry} />}
+                  {mobileGetPoints.length === 0 && <Empty />}
+                </SitoContainer>,
+              ]}
+            />,
           ]}
         ></TabView>
       )}

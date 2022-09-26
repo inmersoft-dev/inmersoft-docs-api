@@ -12,6 +12,7 @@ import { List, ListItem, Chip, Link, Typography } from "@mui/material";
 import LinkButton from "../components/LinkButton/LinkButton";
 
 import config from "../config";
+import Empty from "../components/Empty/Empty";
 
 const Home = () => {
   const [trinidadState, setTrinidadState] = useState("success");
@@ -55,6 +56,7 @@ const Home = () => {
           />
         </ListItem>
       </List>
+      <Empty />
     </SitoContainer>
   );
 };
