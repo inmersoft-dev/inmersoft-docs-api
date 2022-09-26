@@ -271,7 +271,7 @@ const EndPointCell = (props) => {
         title={
           <Box>
             {endPoint.url}
-            <LinkButton link="/indexes/#trinidad" />
+            <LinkButton link={endPoint.link} />
           </Box>
         }
         subheader={endPoint.lastUpdate}

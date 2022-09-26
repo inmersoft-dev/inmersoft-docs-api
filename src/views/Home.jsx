@@ -63,7 +63,7 @@ function Home(props) {
       <Typography variant="h3">Lista de APIs</Typography>
       <List>
         <ListItem>
-          <Link id="trinidad" href="/trinidad">
+          <Link id="trinidad" href={`${process.env.PUBLIC_URL}/trinidad`}>
             Descubre Trinidad
           </Link>
           <LinkButton link="/indexes/#trinidad" />

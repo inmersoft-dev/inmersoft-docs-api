@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
 import PropTypes from "prop-types";
 
 // @mui components
-import { Button, Link } from "@mui/material";
+import { Button } from "@mui/material";
 
 // @mui icons
 import LinkIcon from "@mui/icons-material/Link";
@@ -14,7 +15,7 @@ const LinkButton = (props) => {
   const [show, setShow] = useState(false);
 
   return (
-    <Link underline="none" href={link}>
+    <Link to={link}>
       <Button
         sx={{
           width: "30px",

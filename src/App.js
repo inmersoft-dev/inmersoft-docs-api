@@ -69,7 +69,10 @@ function App() {
                   <p>
                     Presiona <u>comenzar</u> para ir al Índice
                   </p>
-                  <Link className="App-link" href="/indexes">
+                  <Link
+                    className="App-link"
+                    href={`${process.env.PUBLIC_URL}/indexes`}
+                  >
                     Comenzar
                   </Link>
                 </header>
