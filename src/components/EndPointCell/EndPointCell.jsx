@@ -243,6 +243,20 @@ const EndPointCell = (props) => {
     setOpen(!open);
   };
 
+  const share = async () => {
+    const shareData = {
+      title: endPoint.link,
+      text: `${endPoint.description}`,
+      url: `https://inmersoft-dev.github.io${process.env.PUBLIC_URL}${endPoint.link}`,
+    };
+    try {
+      await navigator.share(shareData);
+      console.log("data shared successfully");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Card sx={{ width: "80%", margin: "1rem 0" }}>
       <ActionMenu
@@ -290,7 +304,7 @@ const EndPointCell = (props) => {
           Probar
           {!expanded ? <ExpandMore /> : <ExpandLess />}
         </Button>
-        <IconButton color="primary">
+        <IconButton color="primary" onClick={share}>
           <Share />
         </IconButton>
       </CardActions>
