@@ -48,6 +48,7 @@ function App() {
         <Routes>
           <Route
             path="/"
+            index
             element={
               <Box className="App">
                 <Tooltip title={mode ? "Modo Oscuro" : "Modo Claro"}>
@@ -77,10 +78,12 @@ function App() {
             }
           />
           <Route
+            exact
             path="/indexes"
             element={<Home toggleMode={toggleMode} mode={mode} />}
           />
           <Route
+            exact
             path="/trinidad"
             element={<Trinidad toggleMode={toggleMode} mode={mode} />}
           />
