@@ -1,21 +1,16 @@
 import { useState } from "react";
 
-// images
-import logo from "./logo.svg";
-
 // @mui components
-import { ThemeProvider, CssBaseline, Box, Tooltip, Link } from "@mui/material";
+import { ThemeProvider, CssBaseline } from "@mui/material";
 
 // routes
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // own components
 import Notification from "./components/Notification/Notification";
-import RadialButton from "./components/RadialButton/RadialButton";
-
-// @mui icons
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import LightModeIcon from "@mui/icons-material/LightMode";
+import AppBar from "./components/AppBar/AppBar";
+import ToTop from "./components/ToTop/ToTop";
+import Start from "./components/Start/Start";
 
 // views
 import Trinidad from "./views/Trinidad/Trinidad";
@@ -30,7 +25,6 @@ import light from "./assets/theme/light";
 
 // style
 import "./App.css";
-import ToTop from "./components/ToTop/ToTop";
 
 function App() {
   const [mode, setMode] = useState(false);
@@ -39,44 +33,13 @@ function App() {
 
   return (
     <ThemeProvider theme={mode ? light : dark}>
+      <AppBar toggleMode={toggleMode} mode={mode} />
       <ToTop />
       <CssBaseline />
       <Notification />
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Box className="App">
-                <Tooltip title={mode ? "Modo Oscuro" : "Modo Claro"}>
-                  <RadialButton
-                    sx={{
-                      marginTop: 0,
-                      position: "fixed",
-                      top: "20px",
-                      right: "20px",
-                      zIndex: 20,
-                      transition: "top 500ms ease",
-                    }}
-                    onClick={toggleMode}
-                    icon={mode ? <DarkModeIcon /> : <LightModeIcon />}
-                  />
-                </Tooltip>
-                <header className="App-header">
-                  <img src={logo} className="App-logo" alt="logo" />
-                  <p>
-                    Presiona <u>comenzar</u> para ir al Índice
-                  </p>
-                  <Link
-                    className="App-link"
-                    href={`${process.env.PUBLIC_URL}/indexes`}
-                  >
-                    Comenzar
-                  </Link>
-                </header>
-              </Box>
-            }
-          />
+          <Route path="/" element={<Start />} />
           <Route
             exact
             path="/indexes"
