@@ -30,6 +30,7 @@ import light from "./assets/theme/light";
 
 // style
 import "./App.css";
+import ToTop from "./components/ToTop/ToTop";
 
 function App() {
   const [mode, setMode] = useState(false);
@@ -42,6 +43,7 @@ function App() {
 
   return (
     <ThemeProvider theme={mode ? light : dark}>
+      <ToTop />
       <CssBaseline />
       <Notification />
       <BrowserRouter basename={process.env.PUBLIC_URL}>
