@@ -31,13 +31,6 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
-
 const TabView = (props) => {
   const { content, tabs, value, onChange, sx } = props;
 
@@ -49,10 +42,9 @@ const TabView = (props) => {
           indicatorColor="primary"
           value={value}
           onChange={onChange}
-          aria-label="basic tabs example"
         >
           {tabs.map((item, i) => (
-            <Tab key={item} label={item} {...a11yProps(i)} />
+            <Tab component="a" href={`#${item}`} key={item} label={item} />
           ))}
         </Tabs>
       </Box>

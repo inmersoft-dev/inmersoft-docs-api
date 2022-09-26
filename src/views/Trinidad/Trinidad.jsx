@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import axios from "axios";
@@ -31,9 +32,26 @@ import trinidad from "../../assets/images/trinidad.webp";
 
 const Trinidad = (props) => {
   const { toggleMode, mode } = props;
+  const location = useLocation();
 
   const [tab, setTab] = useState(0);
   const handleTab = (e, newTab) => setTab(newTab);
+
+  useEffect(() => {
+    const { hash } = location;
+    if (hash && hash.length) {
+      const parsedHash = hash.substring(1);
+      console.log(parsedHash);
+      switch (parsedHash) {
+        case "POST":
+          setTab(1);
+          break;
+        default: //* GET
+          setTab(0);
+          break;
+      }
+    }
+  }, [location]);
 
   const [getPoints, setGetPoints] = useState([]);
   const [postPoints, setPostPoints] = useState([]);
