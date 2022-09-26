@@ -19,7 +19,6 @@ jobs:
           npm run-script build
         env:
           REACT_APP_API_URL: ${{ secrets.REACT_APP_API_TRINIDAD_URL }}
-          REACT_APP_BASIC_KEY: ${{ secrets.REACT_APP_JWT_KEY }}
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3

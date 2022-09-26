@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 
 // App
 import App from "./App";
@@ -10,9 +10,9 @@ import { NotificationProvider } from "./contexts/NotificationProvider";
 // styles
 import "./index.css";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
+ReactDOM.render(
   <NotificationProvider>
     <App />
-  </NotificationProvider>
+  </NotificationProvider>,
+  document.getElementById("root")
 );
