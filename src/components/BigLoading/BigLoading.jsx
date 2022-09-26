@@ -16,11 +16,15 @@ const BigLoading = (props) => {
       justifyContent="center"
       alignItems="center"
       sx={{
+        left: "0",
+        top: "0",
         width: "100vw",
         height: "100vh",
-        position: "absolute",
-        transition: "opacity 500ms ease",
+        position: "fixed",
+        transition: "all 500ms ease",
         opacity: visible ? 1 : 0,
+        zIndex: visible ? 99999 : -1,
+        background: "#222333",
       }}
     >
       <Box className="parent-spinner">

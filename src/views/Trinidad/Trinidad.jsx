@@ -73,49 +73,65 @@ const Trinidad = (props) => {
     fetch();
   }, []);
 
+  const [bigTab, setBigTab] = useState(0);
+  const handleBigTab = (e, newTab) => setBigTab(newTab);
+
   return (
     <SitoContainer
       alignItems="center"
       flexDirection="column"
-      sx={{ width: "100%", paddingTop: "64px" }}
+      sx={{ width: "100%", paddingTop: "40px" }}
     >
       <BigLoading visible={loading} logo={trinidad} />
       {!loading && (
         <TabView
-          value={tab}
-          onChange={handleTab}
-          tabs={["GET", "POST"]}
+          tabs={["Web", "Móvil"]}
+          value={bigTab}
+          sx={{
+            "& .css-19kzrtu": {
+              padding: 0,
+            },
+          }}
+          onChange={handleBigTab}
           content={[
-            <SitoContainer flexDirection="column" alignItems="center">
-              {getPoints.length > 0 &&
-                getPoints.map((item, i) => (
-                  <EndPointCell
-                    endPoint={item}
-                    key={i}
-                    mode={mode}
-                    model={models[item.model]}
-                    parent={config.apiTrinidadUrl}
-                  />
-                ))}
-              {getPoints === -1 && <Error onAction={retry} />}
-              {getPoints.length === 0 && <Empty />}
-            </SitoContainer>,
-            <SitoContainer flexDirection="column" alignItems="center">
-              {postPoints.length > 0 &&
-                postPoints.map((item, i) => (
-                  <EndPointCell
-                    endPoint={item}
-                    key={i}
-                    mode={mode}
-                    model={models[item.model]}
-                    parent={config.apiTrinidadUrl}
-                  />
-                ))}
-              {getPoints === -1 && <Error onAction={retry} />}
-              {getPoints.length === 0 && <Empty />}
-            </SitoContainer>,
+            <TabView
+              value={tab}
+              onChange={handleTab}
+              tabs={["GET", "POST"]}
+              content={[
+                <SitoContainer flexDirection="column" alignItems="center">
+                  {getPoints.length > 0 &&
+                    getPoints.map((item, i) => (
+                      <EndPointCell
+                        endPoint={item}
+                        key={i}
+                        mode={mode}
+                        model={models[item.model]}
+                        parent={config.apiTrinidadUrl}
+                      />
+                    ))}
+                  {getPoints === -1 && <Error onAction={retry} />}
+                  {getPoints.length === 0 && <Empty />}
+                </SitoContainer>,
+                <SitoContainer flexDirection="column" alignItems="center">
+                  {postPoints.length > 0 &&
+                    postPoints.map((item, i) => (
+                      <EndPointCell
+                        endPoint={item}
+                        key={i}
+                        mode={mode}
+                        model={models[item.model]}
+                        parent={config.apiTrinidadUrl}
+                      />
+                    ))}
+                  {getPoints === -1 && <Error onAction={retry} />}
+                  {getPoints.length === 0 && <Empty />}
+                </SitoContainer>,
+              ]}
+            />,
+            <></>,
           ]}
-        />
+        ></TabView>
       )}
     </SitoContainer>
   );

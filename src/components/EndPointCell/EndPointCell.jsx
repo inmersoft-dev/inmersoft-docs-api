@@ -207,15 +207,6 @@ const EndPointCell = (props) => {
     }
   };
 
-  const getMethodPadding = () => {
-    switch (endPoint.method) {
-      case "POST":
-        return "22px 15px";
-      default: //* get
-        return "17px 15px";
-    }
-  };
-
   const clean = () => {
     const parametersToClean = {};
     Object.keys(parameters).map((item) => (parametersToClean[item] = ""));
@@ -267,15 +258,18 @@ const EndPointCell = (props) => {
       />
       <CardHeader
         avatar={
-          <Box
+          <SitoContainer
+            justifyContent="center"
+            alignItems="center"
             sx={{
-              bgcolor: getMethodColor(),
-              padding: getMethodPadding(),
+              backgroundColor: getMethodColor(),
+              width: "50px",
+              height: "50px",
               borderRadius: "100%",
             }}
           >
             {endPoint.method}
-          </Box>
+          </SitoContainer>
         }
         action={
           <IconButton color="primary" onClick={openActionMenu}>

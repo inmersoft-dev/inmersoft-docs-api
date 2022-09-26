@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 
 import axios from "axios";
 
-import PropTypes from "prop-types";
-
 // sito components
 import SitoContainer from "sito-container";
 
@@ -15,7 +13,7 @@ import LinkButton from "../components/LinkButton/LinkButton";
 
 import config from "../config";
 
-function Home(props) {
+const Home = () => {
   const [trinidadState, setTrinidadState] = useState("success");
 
   const validateTrinidad = async () => {
@@ -59,11 +57,6 @@ function Home(props) {
       </List>
     </SitoContainer>
   );
-}
-
-Home.propTypes = {
-  toggleMode: PropTypes.func.isRequired,
-  mode: PropTypes.bool.isRequired,
 };
 
 export default Home;
