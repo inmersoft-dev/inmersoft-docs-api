@@ -71,7 +71,7 @@ const AppBar = (props) => {
           </SitoContainer>
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <Tooltip title="Ir al Inicio">
-              <Link color="inherit" href={`${process.env.PUBLIC_URL}/`}>
+              <Link color="inherit" href={`${process.env.PUBLIC_URL}/indexes`}>
                 <IconButton>
                   <HomeIcon />
                 </IconButton>
