@@ -123,7 +123,7 @@ const Trinidad = (props) => {
           {deviceState.device === DeviceEnum.Web && <WebAssetIcon />}
         </Fab>
       </Tooltip>
-      <BigLoading visible={loading} logo={trinidad} />
+      <BigLoading visible={true} logo={trinidad} />
       {!loading && (
         <TabView
           value={tab}

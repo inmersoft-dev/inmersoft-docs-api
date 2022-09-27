@@ -6,6 +6,9 @@ import SitoContainer from "sito-container";
 // @mui components
 import { Box } from "@mui/material";
 
+// own components
+import LogoMarquee from "../LogoMarquee/LogoMarquee";
+
 // images
 import logoReact from "../../logo.svg";
 
@@ -27,6 +30,10 @@ const BigLoading = (props) => {
         background: "#222333",
       }}
     >
+      <LogoMarquee top="-100%" direction="right" />
+      <LogoMarquee top="-40%" />
+      <LogoMarquee top="90%" direction="right" />
+      <LogoMarquee top="140%" />
       <Box className="parent-spinner">
         <img src={logoReact} className="logo-spinner" alt="logo-react" />
       </Box>

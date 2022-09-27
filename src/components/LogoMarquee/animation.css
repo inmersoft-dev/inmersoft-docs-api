@@ -1,0 +1,83 @@
+.logoMarqueeSection {
+  padding-top: 50vh;
+  padding-bottom: 150vh;
+}
+
+#logoMarqueeSection {
+  max-width: 1920px !important;
+  margin: 0 auto;
+}
+
+.default-content-container {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  padding-top: 4.5rem;
+  padding-bottom: 4.5rem;
+  width: 100%;
+  min-height: 100vh;
+}
+
+div.marquee > a > img {
+  height: 120px;
+}
+
+.logoMarqueeSection > div > div {
+  padding-top: 0;
+  padding-bottom: 0;
+  min-height: 0;
+}
+
+.marquee-wrapper {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.marquee-right {
+  display: inline-block;
+  white-space: nowrap;
+  position: relative;
+  transform: translate3d(0%, 0, 0);
+  animation-name: marquee-right;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.marquee-left {
+  display: inline-block;
+  white-space: nowrap;
+  position: relative;
+  transform: translate3d(0%, 0, 0);
+  animation-name: marquee-left;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.marquee a {
+  display: inline-block;
+  white-space: nowrap;
+  padding-right: 5.4rem;
+}
+
+@keyframes marquee-left {
+  0% {
+    transform: translate3d(-80%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(-150%, 0, 0);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translate3d(-150%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(80%, 0, 0);
+  }
+}
