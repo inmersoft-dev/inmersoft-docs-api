@@ -131,6 +131,7 @@ const Trinidad = (props) => {
           tabs={["GET", "POST"]}
           content={[
             <SitoContainer flexDirection="column" alignItems="center">
+              {/* Web GET */}
               {deviceState.device === DeviceEnum.Web &&
                 webGetPoints.length > 0 &&
                 webGetPoints.map((item, i) => (
@@ -142,8 +143,12 @@ const Trinidad = (props) => {
                     parent={config.apiTrinidadWebUrl}
                   />
                 ))}
-              {webGetPoints === -1 && <Error onAction={retry} />}
-              {webGetPoints.length === 0 && <Empty />}
+              {deviceState.device === DeviceEnum.Web && webGetPoints === -1 && (
+                <Error onAction={retry} />
+              )}
+              {deviceState.device === DeviceEnum.Web &&
+                webGetPoints.length === 0 && <Empty />}
+              {/* Mobile GET */}
               {deviceState.device === DeviceEnum.Mobile &&
                 mobileGetPoints.length > 0 &&
                 mobileGetPoints.map((item, i) => (
@@ -161,6 +166,7 @@ const Trinidad = (props) => {
                 mobileGetPoints.length === 0 && <Empty />}
             </SitoContainer>,
             <SitoContainer flexDirection="column" alignItems="center">
+              {/* Web Post */}
               {deviceState.device === DeviceEnum.Web &&
                 webPostPoints.length > 0 &&
                 webPostPoints.map((item, i) => (
@@ -172,9 +178,13 @@ const Trinidad = (props) => {
                     parent={config.apiTrinidadWebUrl}
                   />
                 ))}
-              {webPostPoints === -1 && <Error onAction={retry} />}
-              {webPostPoints.length === 0 && <Empty />}
-              {mobilePostPoints.length > 0 &&
+              {deviceState.device === DeviceEnum.Web &&
+                webPostPoints === -1 && <Error onAction={retry} />}
+              {deviceState.device === DeviceEnum.Web &&
+                webPostPoints.length === 0 && <Empty />}
+              {/* Mobile POST */}
+              {deviceState.device === DeviceEnum.MobileF &&
+                mobilePostPoints.length > 0 &&
                 mobilePostPoints.map((item, i) => (
                   <EndPointCell
                     endPoint={item}
@@ -184,8 +194,10 @@ const Trinidad = (props) => {
                     parent={config.apiTrinidadMobileUrl}
                   />
                 ))}
-              {mobilePostPoints === -1 && <Error onAction={retry} />}
-              {mobilePostPoints.length === 0 && <Empty />}
+              {deviceState.device === DeviceEnum.Mobile &&
+                mobilePostPoints === -1 && <Error onAction={retry} />}
+              {deviceState.device === DeviceEnum.Mobile &&
+                mobilePostPoints.length === 0 && <Empty />}
             </SitoContainer>,
           ]}
         />
