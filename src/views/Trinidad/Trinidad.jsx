@@ -16,6 +16,16 @@ import TabView from "../../components/TabView/TabView";
 import Error from "../../components/Error/Error";
 import Empty from "../../components/Empty/Empty";
 
+// @mui components
+import { Tooltip, Fab } from "@mui/material";
+
+// @mui icons
+import WebAssetIcon from "@mui/icons-material/WebAsset";
+import SmartphoneIcon from "@mui/icons-material/Smartphone";
+
+// context
+import { DeviceEnum, useDevice } from "../../contexts/DeviceProvider";
+
 // config
 import config from "../../config";
 
@@ -25,6 +35,13 @@ import trinidad from "../../assets/images/trinidad.webp";
 const Trinidad = (props) => {
   const { mode } = props;
   const location = useLocation();
+
+  const { deviceState, setDeviceState } = useDevice();
+
+  const toggleDevice = () =>
+    setDeviceState({
+      type: deviceState.device === DeviceEnum.Mobile ? "toWeb" : "toMobile",
+    });
 
   const [tab, setTab] = useState(0);
   const handleTab = (e, newTab) => setTab(newTab);
@@ -58,7 +75,6 @@ const Trinidad = (props) => {
     try {
       const response = await axios.get(`${config.apiTrinidadUrl}docs/fetch`);
       const data = await response.data;
-      console.log("data", data);
       setWebGetPoints(data.webGetPoints);
       setMobileGetPoints(data.mobileGetPoints);
       setWebPostPoints(data.webPostPoints);
@@ -83,99 +99,96 @@ const Trinidad = (props) => {
     fetch();
   }, []);
 
-  const [bigTab, setBigTab] = useState(0);
-  const handleBigTab = (e, newTab) => setBigTab(newTab);
-
   return (
     <SitoContainer
       alignItems="center"
       flexDirection="column"
       sx={{ width: "100%", paddingTop: "40px" }}
     >
+      <Tooltip
+        title={
+          deviceState.device === DeviceEnum.Mobile
+            ? "Cliente Móvil"
+            : "Cliente Web"
+        }
+      >
+        <Fab
+          sx={{ position: "fixed", left: "20px", bottom: "20px" }}
+          size="small"
+          color="primary"
+          aria-label="add"
+          onClick={toggleDevice}
+        >
+          {deviceState.device === DeviceEnum.Mobile && <SmartphoneIcon />}
+          {deviceState.device === DeviceEnum.Web && <WebAssetIcon />}
+        </Fab>
+      </Tooltip>
       <BigLoading visible={loading} logo={trinidad} />
       {!loading && (
         <TabView
-          tabs={["Web", "Móvil"]}
-          value={bigTab}
-          sx={{
-            "& .css-19kzrtu": {
-              padding: 0,
-            },
-          }}
-          onChange={handleBigTab}
+          value={tab}
+          onChange={handleTab}
+          tabs={["GET", "POST"]}
           content={[
-            <TabView
-              value={tab}
-              onChange={handleTab}
-              tabs={["GET", "POST"]}
-              content={[
-                <SitoContainer flexDirection="column" alignItems="center">
-                  {webGetPoints.length > 0 &&
-                    webGetPoints.map((item, i) => (
-                      <EndPointCell
-                        endPoint={item}
-                        key={i}
-                        mode={mode}
-                        model={webModels[item.model]}
-                        parent={config.apiTrinidadWebUrl}
-                      />
-                    ))}
-                  {webGetPoints === -1 && <Error onAction={retry} />}
-                  {webGetPoints.length === 0 && <Empty />}
-                </SitoContainer>,
-                <SitoContainer flexDirection="column" alignItems="center">
-                  {webPostPoints.length > 0 &&
-                    webPostPoints.map((item, i) => (
-                      <EndPointCell
-                        endPoint={item}
-                        key={i}
-                        mode={mode}
-                        model={webModels[item.model]}
-                        parent={config.apiTrinidadWebUrl}
-                      />
-                    ))}
-                  {webGetPoints === -1 && <Error onAction={retry} />}
-                  {webGetPoints.length === 0 && <Empty />}
-                </SitoContainer>,
-              ]}
-            />,
-            <TabView
-              value={tab}
-              onChange={handleTab}
-              tabs={["GET", "POST"]}
-              content={[
-                <SitoContainer flexDirection="column" alignItems="center">
-                  {mobileGetPoints.length > 0 &&
-                    mobileGetPoints.map((item, i) => (
-                      <EndPointCell
-                        endPoint={item}
-                        key={i}
-                        mode={mode}
-                        model={mobileModels[item.model]}
-                        parent={config.apiTrinidadMobileUrl}
-                      />
-                    ))}
-                  {mobileGetPoints === -1 && <Error onAction={retry} />}
-                  {mobileGetPoints.length === 0 && <Empty />}
-                </SitoContainer>,
-                <SitoContainer flexDirection="column" alignItems="center">
-                  {mobilePostPoints.length > 0 &&
-                    mobilePostPoints.map((item, i) => (
-                      <EndPointCell
-                        endPoint={item}
-                        key={i}
-                        mode={mode}
-                        model={mobileModels[item.model]}
-                        parent={config.apiTrinidadMobileUrl}
-                      />
-                    ))}
-                  {mobileGetPoints === -1 && <Error onAction={retry} />}
-                  {mobileGetPoints.length === 0 && <Empty />}
-                </SitoContainer>,
-              ]}
-            />,
+            <SitoContainer flexDirection="column" alignItems="center">
+              {deviceState.device === DeviceEnum.Web &&
+                webGetPoints.length > 0 &&
+                webGetPoints.map((item, i) => (
+                  <EndPointCell
+                    endPoint={item}
+                    key={i}
+                    mode={mode}
+                    model={{ web: webModels[item.model] }}
+                    parent={config.apiTrinidadWebUrl}
+                  />
+                ))}
+              {webGetPoints === -1 && <Error onAction={retry} />}
+              {webGetPoints.length === 0 && <Empty />}
+              {deviceState.device === DeviceEnum.Mobile &&
+                mobileGetPoints.length > 0 &&
+                mobileGetPoints.map((item, i) => (
+                  <EndPointCell
+                    endPoint={item}
+                    key={i}
+                    mode={mode}
+                    model={mobileModels[item.model]}
+                    parent={config.apiTrinidadMobileUrl}
+                  />
+                ))}
+              {deviceState.device === DeviceEnum.Mobile &&
+                mobileGetPoints === -1 && <Error onAction={retry} />}
+              {deviceState.device === DeviceEnum.Mobile &&
+                mobileGetPoints.length === 0 && <Empty />}
+            </SitoContainer>,
+            <SitoContainer flexDirection="column" alignItems="center">
+              {deviceState.device === DeviceEnum.Web &&
+                webPostPoints.length > 0 &&
+                webPostPoints.map((item, i) => (
+                  <EndPointCell
+                    endPoint={item}
+                    key={i}
+                    mode={mode}
+                    model={webModels[item.model]}
+                    parent={config.apiTrinidadWebUrl}
+                  />
+                ))}
+              {webPostPoints === -1 && <Error onAction={retry} />}
+              {webPostPoints.length === 0 && <Empty />}
+              {mobilePostPoints.length > 0 &&
+                mobilePostPoints.map((item, i) => (
+                  <EndPointCell
+                    endPoint={item}
+                    key={i}
+                    mode={mode}
+                    model={mobileModels[item.model]}
+                    parent={config.apiTrinidadMobileUrl}
+                  />
+                ))}
+              {mobilePostPoints === -1 && <Error onAction={retry} />}
+              {mobilePostPoints.length === 0 && <Empty />}
+            </SitoContainer>,
           ]}
-        ></TabView>
+        />
       )}
     </SitoContainer>
   );
