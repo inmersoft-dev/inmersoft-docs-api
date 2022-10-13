@@ -15,6 +15,7 @@ import config from "../config";
 
 const Home = () => {
   const [trinidadState, setTrinidadState] = useState("success");
+  const [santaIfigeniaState, setSantaIfigeniaState] = useState("success");
 
   const validateTrinidad = async () => {
     try {
@@ -26,6 +27,16 @@ const Home = () => {
     }
   };
 
+  const validateSantaIfigenia = async () => {
+    try {
+      await axios.get(`${config.apiSantaIfigeniaUrl}docs`);
+      setSantaIfigeniaState("success");
+    } catch (err) {
+      console.log(err);
+      setSantaIfigeniaState("error");
+    }
+  };
+
   const states = {
     success: "ONLINE",
     error: "OFFLINE",
@@ -33,6 +44,7 @@ const Home = () => {
 
   useEffect(() => {
     validateTrinidad();
+    validateSantaIfigenia();
   }, []);
 
   return (
@@ -51,6 +63,21 @@ const Home = () => {
             sx={{ marginLeft: "20px" }}
             label={states[trinidadState]}
             color={trinidadState}
+            size="small"
+          />
+        </ListItem>
+        <ListItem>
+          <Link
+            id="santa-ifigenia"
+            href={`${process.env.PUBLIC_URL}/santa-ifigenia`}
+          >
+            Santa Ifiginea
+          </Link>
+          <LinkButton link="/indexes/#santa-ifigenia" />
+          <Chip
+            sx={{ marginLeft: "20px" }}
+            label={states[santaIfigeniaState]}
+            color={santaIfigeniaState}
             size="small"
           />
         </ListItem>

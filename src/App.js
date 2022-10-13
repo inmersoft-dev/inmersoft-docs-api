@@ -13,6 +13,7 @@ import ToTop from "./components/ToTop/ToTop";
 import Start from "./components/Start/Start";
 
 // views
+import SantaIfigenia from "./views/SantaIfigenia/SantaIfigenia";
 import Trinidad from "./views/Trinidad/Trinidad";
 import NotFound from "./views/404/NotFound";
 import Home from "./views/Home";
@@ -49,6 +50,11 @@ function App() {
             exact
             path="/trinidad"
             element={<Trinidad toggleMode={toggleMode} mode={mode} />}
+          />
+          <Route
+            exact
+            path="/santa-ifigenia"
+            element={<SantaIfigenia toggleMode={toggleMode} mode={mode} />}
           />
           <Route
             path="*"

@@ -4,8 +4,11 @@
   "private": false,
   "homepage": "https://inmersot-dev.github.io/inmersoft-docs-api/",
   "dependencies": {
+    "@emotion/css": "^11.10.0",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.6",
-    "@mui/styled-engine-sc": "^5.10.6",
     "axios": "^0.27.2",
     "env-cmd": "^10.1.0",
     "gh-pages": "^4.0.0",
@@ -17,9 +20,8 @@
     "react-json-view": "^1.21.3",
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
-    "sito-container": "^0.2.21",
-    "sito-image": "^0.3.9",
-    "styled-components": "^5.3.5"
+    "sito-container": "^0.4.1",
+    "sito-image": "^0.13.1"
   },
   "scripts": {
     "start": "env-cmd -f .env react-scripts start",

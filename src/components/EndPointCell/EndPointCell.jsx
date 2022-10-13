@@ -163,6 +163,7 @@ const EndPointCell = (props) => {
               else queryParameters += `&${item}=${d[item]}`;
             }
           });
+          console.log(parent, endPoint);
           const response = await axios.get(
             `${parent}${endPoint.url}?${queryParameters}`,
             {
@@ -173,6 +174,7 @@ const EndPointCell = (props) => {
             }
           );
           const data = await response.data;
+          console.log(data);
           setRespond(data);
         } catch (err) {
           console.log(err);
