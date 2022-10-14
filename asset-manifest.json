@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/inmersoft-docs-api/static/css/main.20e2248f.css",
-    "main.js": "/inmersoft-docs-api/static/js/main.ca01fb1f.js",
+    "main.js": "/inmersoft-docs-api/static/js/main.1d8c560e.js",
     "static/media/conservador.webp": "/inmersoft-docs-api/static/media/conservador.f6caf76b0b17c6decd31.webp",
     "static/media/trinidad.webp": "/inmersoft-docs-api/static/media/trinidad.be438b7ff4ee62174c73.webp",
     "static/media/logo.svg": "/inmersoft-docs-api/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/inmersoft-docs-api/index.html",
     "main.20e2248f.css.map": "/inmersoft-docs-api/static/css/main.20e2248f.css.map",
-    "main.ca01fb1f.js.map": "/inmersoft-docs-api/static/js/main.ca01fb1f.js.map"
+    "main.1d8c560e.js.map": "/inmersoft-docs-api/static/js/main.1d8c560e.js.map"
   },
   "entrypoints": [
     "static/css/main.20e2248f.css",
-    "static/js/main.ca01fb1f.js"
+    "static/js/main.1d8c560e.js"
   ]
 }
