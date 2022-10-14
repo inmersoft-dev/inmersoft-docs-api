@@ -19,6 +19,8 @@ jobs:
           yarn build
         env:
           REACT_APP_API_URL: ${{ secrets.REACT_APP_API_TRINIDAD_URL }}
+          REACT_APP_API_SANTA_IFIGENIA_URL: ${{ secrets.REACT_APP_API_SANTA_IFIGENIA_URL }}
+          REACT_APP_API_SANTA_IFIGENIA_CLIENT_URL: ${{ secrets.REACT_APP_API_SANTA_IFIGENIA_CLIENT_URL }}
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
