@@ -1,10 +1,13 @@
-// images
-import logo from "../../logo.svg";
-
 // @mui components
 import { Box, Link } from "@mui/material";
 
+// images
+import logo from "../../logo.svg";
+
+import config from "../../config";
+
 const Start = () => {
+  console.log(config);
   return (
     <Box className="App">
       <header className="App-header">
