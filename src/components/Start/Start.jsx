@@ -4,10 +4,7 @@ import { Box, Link } from "@mui/material";
 // images
 import logo from "../../logo.svg";
 
-import config from "../../config";
-
 const Start = () => {
-  console.log(config, process.env);
   return (
     <Box className="App">
       <header className="App-header">
