@@ -52,6 +52,14 @@ body {
   animation: parent-spinner 1 0.3s ease;
 }
 
+@media (max-width: 450px) {
+  .logo-industry {
+    height: 34px !important;
+    margin-top: -7px !important;
+    margin-left: -1px !important;
+  }
+}
+
 @keyframes parent-spinner {
   0% {
     transform: scale(0);

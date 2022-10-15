@@ -35,20 +35,16 @@ const AppBar = (props) => {
 
   const [showDrawer, setShowDrawer] = useState(false);
 
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
-    setShowDrawer(open);
-  };
+  const handleDrawer = () => setShowDrawer(!showDrawer);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Drawer state={showDrawer} toggleDrawer={toggleDrawer} />
+      <Drawer
+        mode={mode}
+        toggleMode={toggleMode}
+        visible={showDrawer}
+        handleClose={handleDrawer}
+      />
       <MUIAppBar position="fixed">
         <Toolbar
           sx={{
@@ -63,16 +59,18 @@ const AppBar = (props) => {
               edge="start"
               color="inherit"
               sx={{ mr: 2, display: { md: "none", sm: "inherit" } }}
-              onClick={() => toggleDrawer("left", true)}
+              onClick={handleDrawer}
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h4">Inmersoft-Docs-APIs</Typography>
+            <Typography variant="h5" fontWeight="bold">
+              Inmersoft-Docs-APIs
+            </Typography>
           </SitoContainer>
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <Tooltip title="Ir al Inicio">
               <Link color="inherit" href={`${process.env.PUBLIC_URL}/indexes`}>
-                <IconButton>
+                <IconButton color="inherit">
                   <HomeIcon />
                 </IconButton>
               </Link>
@@ -85,7 +83,7 @@ const AppBar = (props) => {
                 target="_blank"
                 color="inherit"
               >
-                <IconButton>
+                <IconButton color="inherit">
                   <GitHubIcon />
                 </IconButton>
               </Link>

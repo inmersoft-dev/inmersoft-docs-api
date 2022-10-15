@@ -1,73 +1,136 @@
 import PropTypes from "prop-types";
 
-// @mui components
-import {
-  Box,
-  Drawer as MUIDrawer,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Button,
-  Divider,
-} from "@mui/material";
+// sito components
+import SitoContainer from "sito-container";
 
-// @mui icons
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+// @mui/material
+import { Tooltip, Typography, Link, IconButton, Button } from "@mui/material";
+
+// @mui/icons-material
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LaunchIcon from "@mui/icons-material/Launch";
+import CancelIcon from "@mui/icons-material/Cancel";
+import HomeIcon from "@mui/icons-material/Home";
 
 const Drawer = (props) => {
-  const { state, toggleDrawer } = props;
+  const { mode, visible, handleClose, toggleMode } = props;
 
   return (
-    <Box>
-      <Button onClick={toggleDrawer("left", true)}>left</Button>
-      <MUIDrawer
-        anchor="left"
-        open={state}
-        onClose={toggleDrawer("left", false)}
+    <SitoContainer
+      extraProps={{ onClick: handleClose }}
+      sx={{
+        top: 0,
+        left: 0,
+        height: "100vh",
+        position: "fixed",
+        width: "100vw",
+        zIndex: visible ? 9999 : -1,
+        transition: "z-index 500ms ease",
+      }}
+    >
+      <SitoContainer
+        sx={{
+          width: visible ? "100vw" : 0,
+          height: "100vh",
+          background: "#222222ce",
+          position: "absolute",
+          zIndex: 999999,
+        }}
       >
-        <Box
-          sx={{ width: 250 }}
-          role="presentation"
-          onClick={toggleDrawer("left", false)}
-          onKeyDown={toggleDrawer("left", false)}
+        <SitoContainer
+          flexDirection="column"
+          sx={{
+            transition: "all 500ms ease",
+            height: "100%",
+            width: "300px",
+            transform: `translateX(${visible ? 0 : "-300px"})`,
+            background: "#333444",
+            zIndex: 999999,
+          }}
         >
-          <List>
-            {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {["All mail", "Trash", "Spam"].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-        </Box>
-      </MUIDrawer>
-    </Box>
+          <SitoContainer
+            justifyContent="flex-end"
+            sx={{ width: "100%", position: "relative", height: "40px" }}
+          >
+            <IconButton color="error" onClick={handleClose}>
+              <CancelIcon />
+            </IconButton>
+          </SitoContainer>
+          <SitoContainer flexDirection="column" sx={{ paddingLeft: "20px" }}>
+            <Typography variant="h5" fontWeight="bold">
+              Inmersoft-Docs-APIs
+            </Typography>
+            <Tooltip title="Ir al Inicio">
+              <Link
+                color="inherit"
+                underline="none"
+                href={`${process.env.PUBLIC_URL}/indexes`}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginTop: "10px",
+                }}
+              >
+                <IconButton color="inherit">
+                  <HomeIcon />
+                </IconButton>
+                Go Home
+              </Link>
+            </Tooltip>
+            <Tooltip title="Ir a GitHub">
+              <Link
+                underline="none"
+                rel="noopener"
+                target="_blank"
+                color="inherit"
+                href="https://github.com/inmersoft-dev/inmersoft-docs-api"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginTop: "10px",
+                }}
+              >
+                <IconButton color="inherit">
+                  <GitHubIcon />
+                </IconButton>
+                GitHub{" "}
+                <LaunchIcon sx={{ marginLeft: "5px", fontSize: "14px" }} />
+              </Link>
+            </Tooltip>
+            <Tooltip title={mode ? "Modo Oscuro" : "Modo Claro"}>
+              <Button
+                type="button"
+                color="inherit"
+                onClick={toggleMode}
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  marginTop: "10px",
+                  justifyContent: "flex-start",
+                }}
+              >
+                {mode ? (
+                  <DarkModeIcon sx={{ marginRight: "10px" }} />
+                ) : (
+                  <LightModeIcon sx={{ marginRight: "10px" }} />
+                )}
+                Toggle Mode
+              </Button>
+            </Tooltip>
+          </SitoContainer>
+        </SitoContainer>
+      </SitoContainer>
+    </SitoContainer>
   );
 };
 
 Drawer.propTypes = {
-  state: PropTypes.bool.isRequired,
-  toggleDrawer: PropTypes.func.isRequired,
+  mode: PropTypes.bool.isRequired,
+  visible: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  toggleMode: PropTypes.func.isRequired,
 };
 
 export default Drawer;
