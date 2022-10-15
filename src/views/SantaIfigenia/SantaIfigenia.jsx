@@ -79,7 +79,7 @@ const SantaIfigenia = (props) => {
     <SitoContainer
       alignItems="center"
       flexDirection="column"
-      sx={{ width: "100%", paddingTop: "40px" }}
+      sx={{ width: "100%", paddingTop: "65px" }}
     >
       <BigLoading visible={loading} logo={conservador} />
       {!loading && (
