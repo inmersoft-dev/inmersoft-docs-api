@@ -10,10 +10,10 @@ const Start = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Presiona <u>comenzar</u> para ir al Índice
+          Press <u>start</u> to go to the index
         </p>
         <Link className="App-link" href={`${process.env.PUBLIC_URL}/indexes`}>
-          Comenzar
+          start
         </Link>
       </header>
     </Box>

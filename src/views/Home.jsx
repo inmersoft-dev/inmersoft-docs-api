@@ -52,7 +52,7 @@ const Home = () => {
       flexDirection="column"
       sx={{ padding: "100px 24px 100px 24px" }}
     >
-      <Typography variant="h3">Lista de APIs</Typography>
+      <Typography variant="h3">API's list</Typography>
       <List>
         <ListItem>
           <Link id="trinidad" href={`${process.env.PUBLIC_URL}/trinidad`}>
