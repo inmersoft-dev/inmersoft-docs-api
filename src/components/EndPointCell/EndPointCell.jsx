@@ -26,6 +26,7 @@ import {
   IconButton,
   Typography,
   TextField,
+  Link,
 } from "@mui/material";
 
 // @mui icons
@@ -156,13 +157,7 @@ const EndPointCell = (props) => {
         break;
       default: //* GET
         try {
-          let queryParameters = "";
-          Object.keys(d).forEach((item, i) => {
-            if (d[item]) {
-              if (i === 0) queryParameters += `${item}=${d[item]}`;
-              else queryParameters += `&${item}=${d[item]}`;
-            }
-          });
+          const queryParameters = parseQuery(d);
           const response = await axios.get(
             `${parent}${endPoint.url}?${queryParameters}`,
             {
@@ -192,7 +187,6 @@ const EndPointCell = (props) => {
     setAttributes({ type: "remove", who, index });
 
   useEffect(() => {
-    console.log(endPoint);
     setParameters({ type: "set", parameters: endPoint.parameters });
   }, [endPoint]);
 
@@ -249,6 +243,17 @@ const EndPointCell = (props) => {
     }
   };
 
+  const parseQuery = (data) => {
+    let queryParameters = "";
+    Object.keys(data).forEach((item, i) => {
+      if (data[item]) {
+        if (i === 0) queryParameters += `${item}=${data[item]}`;
+        else queryParameters += `&${item}=${data[item]}`;
+      }
+    });
+    return queryParameters;
+  };
+
   return (
     <Card sx={{ width: "80%", margin: "1rem 0" }}>
       <ActionMenu
@@ -296,7 +301,7 @@ const EndPointCell = (props) => {
           sx={{ display: "flex" }}
           variant="outlined"
         >
-          Probar
+          Try it
           {!expanded ? <ExpandMore /> : <ExpandLess />}
         </Button>
         <IconButton color="primary" onClick={share}>
@@ -305,7 +310,7 @@ const EndPointCell = (props) => {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent component="form" onSubmit={handleSubmit(onSubmit)}>
-          <Typography paragraph>Parámetros:</Typography>
+          <Typography paragraph>Parameters:</Typography>
           {Object.values(parameters).map((item) => (
             <Box key={item.label} sx={{ margin: "20px 0", width: "100%" }}>
               {item.type === "number" && (
@@ -337,7 +342,7 @@ const EndPointCell = (props) => {
                         />
                       )}
                     />
-                    <Tooltip title="Agregar atributo">
+                    <Tooltip title="Add attribute">
                       <IconButton
                         onClick={() => addChips(item.id)}
                         color="primary"
@@ -385,19 +390,19 @@ const EndPointCell = (props) => {
               variant="contained"
               sx={{ marginRight: "20px" }}
             >
-              Ejecutar
+              Execute
             </Button>
             <Button type="button" onClick={clean} variant="outlined">
-              Limpiar
+              Clear
             </Button>
           </SitoContainer>
           <TabView
             value={tab}
             onChange={handleTab}
-            tabs={["Respuestas", "Prueba"]}
+            tabs={["Respuestas", "Test"]}
             content={[
               <Box>
-                <Typography paragraph>Respuesta:</Typography>
+                <Typography paragraph>Response:</Typography>
                 <Box
                   sx={{
                     minHeight: "300px",
@@ -413,7 +418,18 @@ const EndPointCell = (props) => {
                   width: "100%",
                 }}
               >
-                <Typography paragraph>Prueba:</Typography>
+                <Typography paragraph>Test:</Typography>
+                <Link
+                  target="_blank"
+                  rel="noreferrer"
+                  href={config.apiTrinidadUrl}
+                >
+                  {config.apiSantaIfigeniaClientUrl}
+                  {endPoint.url}
+                  {endPoint.method === "GET"
+                    ? `?${parseQuery(getValues())}`
+                    : ""}
+                </Link>
                 <Loading
                   visible={loadingState}
                   sx={{
