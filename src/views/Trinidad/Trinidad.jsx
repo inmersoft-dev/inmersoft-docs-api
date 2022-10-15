@@ -17,11 +17,11 @@ import Error from "../../components/Error/Error";
 import Empty from "../../components/Empty/Empty";
 
 // @mui components
-import { Tooltip, Fab } from "@mui/material";
+// import { Tooltip, Fab } from "@mui/material";
 
 // @mui icons
-import WebAssetIcon from "@mui/icons-material/WebAsset";
-import SmartphoneIcon from "@mui/icons-material/Smartphone";
+// import WebAssetIcon from "@mui/icons-material/WebAsset";
+// import SmartphoneIcon from "@mui/icons-material/Smartphone";
 
 // context
 import { DeviceEnum, useDevice } from "../../contexts/DeviceProvider";
@@ -36,12 +36,12 @@ const Trinidad = (props) => {
   const { mode } = props;
   const location = useLocation();
 
-  const { deviceState, setDeviceState } = useDevice();
+  const { deviceState } = useDevice();
 
-  const toggleDevice = () =>
+  /* const toggleDevice = () =>
     setDeviceState({
       type: deviceState.device === DeviceEnum.Mobile ? "toWeb" : "toMobile",
-    });
+    }); */
 
   const [tab, setTab] = useState(0);
   const handleTab = (e, newTab) => setTab(newTab);
@@ -63,10 +63,10 @@ const Trinidad = (props) => {
 
   const [webGetPoints, setWebGetPoints] = useState([]);
   const [webPostPoints, setWebPostPoints] = useState([]);
-  const [mobileGetPoints, setMobileGetPoints] = useState([]);
-  const [mobilePostPoints, setMobilePostPoints] = useState([]);
+  const [, setMobileGetPoints] = useState([]);
+  const [, setMobilePostPoints] = useState([]);
   const [webModels, setWebModels] = useState([]);
-  const [mobileModels, setMobileModels] = useState([]);
+  const [, setMobileModels] = useState([]);
 
   const [loading, setLoading] = useState(true);
 
