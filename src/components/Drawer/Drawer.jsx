@@ -62,7 +62,7 @@ const Drawer = (props) => {
             <Typography variant="h5" fontWeight="bold">
               Inmersoft-Docs-APIs
             </Typography>
-            <Tooltip title="Ir al Inicio">
+            <Tooltip title="Go Home">
               <Link
                 color="inherit"
                 underline="none"
@@ -79,7 +79,7 @@ const Drawer = (props) => {
                 Go Home
               </Link>
             </Tooltip>
-            <Tooltip title="Ir a GitHub">
+            <Tooltip title="Go to Github">
               <Link
                 underline="none"
                 rel="noopener"
@@ -99,7 +99,7 @@ const Drawer = (props) => {
                 <LaunchIcon sx={{ marginLeft: "5px", fontSize: "14px" }} />
               </Link>
             </Tooltip>
-            <Tooltip title={mode ? "Modo Oscuro" : "Modo Claro"}>
+            <Tooltip title={mode ? "Dark Mode" : "Light Mode"}>
               <Button
                 type="button"
                 color="inherit"

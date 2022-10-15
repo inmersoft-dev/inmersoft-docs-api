@@ -28,7 +28,7 @@ const ActionMenu = (props) => {
           <ListItemIcon>
             <AutoAwesomeIcon color="primary" fontSize="small" />
           </ListItemIcon>
-          <ListItemText>Sugerir cambio</ListItemText>
+          <ListItemText>Suggest feature</ListItemText>
         </MenuItem>
       </Link>
       <Link
@@ -42,7 +42,7 @@ const ActionMenu = (props) => {
           <ListItemIcon>
             <BugReportIcon color="primary" fontSize="small" />
           </ListItemIcon>
-          <ListItemText>Reportar bug</ListItemText>
+          <ListItemText>Report bug</ListItemText>
         </MenuItem>
       </Link>
     </Menu>

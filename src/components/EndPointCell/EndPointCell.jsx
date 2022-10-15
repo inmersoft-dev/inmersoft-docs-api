@@ -424,7 +424,7 @@ const EndPointCell = (props) => {
                   rel="noreferrer"
                   href={config.apiTrinidadUrl}
                 >
-                  {config.apiSantaIfigeniaClientUrl}
+                  {parent}
                   {endPoint.url}
                   {endPoint.method === "GET"
                     ? `?${parseQuery(getValues())}`

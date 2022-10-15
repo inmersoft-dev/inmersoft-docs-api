@@ -27,7 +27,7 @@ const Error = (props) => {
         color="inherit"
         variant="subtitle1"
       >
-        Ha ocurrido un error
+        Something went wrong
       </Typography>
       {onAction && (
         <Button
@@ -37,7 +37,7 @@ const Error = (props) => {
           sx={{ marginTop: "15px" }}
         >
           <ReplayIcon sx={{ marginRight: "15px" }} />
-          Reintentar
+          Retry
         </Button>
       )}
     </SitoContainer>

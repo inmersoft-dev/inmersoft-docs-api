@@ -68,14 +68,14 @@ const AppBar = (props) => {
             </Typography>
           </SitoContainer>
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <Tooltip title="Ir al Inicio">
+            <Tooltip title="Go Home">
               <Link color="inherit" href={`${process.env.PUBLIC_URL}/indexes`}>
                 <IconButton color="inherit">
                   <HomeIcon />
                 </IconButton>
               </Link>
             </Tooltip>
-            <Tooltip title="Ir a GitHub">
+            <Tooltip title="Go to Github">
               <Link
                 underline="none"
                 rel="noopener"
@@ -88,7 +88,7 @@ const AppBar = (props) => {
                 </IconButton>
               </Link>
             </Tooltip>
-            <Tooltip title={mode ? "Modo Oscuro" : "Modo Claro"}>
+            <Tooltip title={mode ? "Dark Mode" : "Light Mode"}>
               <IconButton color="inherit" onClick={toggleMode}>
                 {mode ? <DarkModeIcon /> : <LightModeIcon />}
               </IconButton>
@@ -97,7 +97,7 @@ const AppBar = (props) => {
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
-              <StyledInputBase placeholder="Buscar…" />
+              <StyledInputBase placeholder="Search…" />
             </Search>
           </Box>
         </Toolbar>
