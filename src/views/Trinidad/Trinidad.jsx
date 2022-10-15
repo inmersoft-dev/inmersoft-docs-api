@@ -105,7 +105,7 @@ const Trinidad = (props) => {
       flexDirection="column"
       sx={{ width: "100%", paddingTop: "65px" }}
     >
-      <Tooltip
+      {/* <Tooltip
         title={
           deviceState.device === DeviceEnum.Mobile
             ? "Cliente Móvil"
@@ -122,7 +122,7 @@ const Trinidad = (props) => {
           {deviceState.device === DeviceEnum.Mobile && <SmartphoneIcon />}
           {deviceState.device === DeviceEnum.Web && <WebAssetIcon />}
         </Fab>
-      </Tooltip>
+      </Tooltip> */}
       <BigLoading visible={loading} logo={trinidad} />
       {!loading && (
         <TabView
@@ -149,7 +149,7 @@ const Trinidad = (props) => {
               {deviceState.device === DeviceEnum.Web &&
                 webGetPoints.length === 0 && <Empty />}
               {/* Mobile GET */}
-              {deviceState.device === DeviceEnum.Mobile &&
+              {/* deviceState.device === DeviceEnum.Mobile &&
                 mobileGetPoints.length > 0 &&
                 mobileGetPoints.map((item, i) => (
                   <EndPointCell
@@ -159,11 +159,11 @@ const Trinidad = (props) => {
                     model={mobileModels[item.model]}
                     parent={config.apiTrinidadMobileUrl}
                   />
-                ))}
-              {deviceState.device === DeviceEnum.Mobile &&
-                mobileGetPoints === -1 && <Error onAction={retry} />}
-              {deviceState.device === DeviceEnum.Mobile &&
-                mobileGetPoints.length === 0 && <Empty />}
+                )) */}
+              {/* deviceState.device === DeviceEnum.Mobile &&
+                mobileGetPoints === -1 && <Error onAction={retry} /> */}
+              {/* deviceState.device === DeviceEnum.Mobile &&
+                mobileGetPoints.length === 0 && <Empty /> */}
             </SitoContainer>,
             <SitoContainer flexDirection="column" alignItems="center">
               {/* Web Post */}
@@ -183,7 +183,7 @@ const Trinidad = (props) => {
               {deviceState.device === DeviceEnum.Web &&
                 webPostPoints.length === 0 && <Empty />}
               {/* Mobile POST */}
-              {deviceState.device === DeviceEnum.MobileF &&
+              {/* deviceState.device === DeviceEnum.MobileF &&
                 mobilePostPoints.length > 0 &&
                 mobilePostPoints.map((item, i) => (
                   <EndPointCell
@@ -193,11 +193,11 @@ const Trinidad = (props) => {
                     model={mobileModels[item.model]}
                     parent={config.apiTrinidadMobileUrl}
                   />
-                ))}
-              {deviceState.device === DeviceEnum.Mobile &&
-                mobilePostPoints === -1 && <Error onAction={retry} />}
-              {deviceState.device === DeviceEnum.Mobile &&
-                mobilePostPoints.length === 0 && <Empty />}
+                )) */}
+              {/* deviceState.device === DeviceEnum.Mobile &&
+                mobilePostPoints === -1 && <Error onAction={retry} /> */}
+              {/* deviceState.device === DeviceEnum.Mobile &&
+                mobilePostPoints.length === 0 && <Empty /> */}
             </SitoContainer>,
           ]}
         />

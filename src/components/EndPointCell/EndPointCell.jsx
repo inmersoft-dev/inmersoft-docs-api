@@ -192,6 +192,7 @@ const EndPointCell = (props) => {
     setAttributes({ type: "remove", who, index });
 
   useEffect(() => {
+    console.log(endPoint);
     setParameters({ type: "set", parameters: endPoint.parameters });
   }, [endPoint]);
 
