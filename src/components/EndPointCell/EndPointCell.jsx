@@ -122,7 +122,7 @@ const EndPointCell = (props) => {
 
   const onSubmit = async (d) => {
     setLoadingState(true);
-    setTab(1);
+    setTab(2);
     switch (endPoint.method) {
       case "POST":
         try {
@@ -159,7 +159,9 @@ const EndPointCell = (props) => {
         try {
           const queryParameters = parseQuery(d);
           const response = await axios.get(
-            `${parent}${endPoint.url}?${queryParameters}`,
+            `${parent}${endPoint.url}${
+              queryParameters.length ? `?${queryParameters}` : ""
+            }`,
             {
               headers: {
                 ...getAuth,
@@ -252,6 +254,22 @@ const EndPointCell = (props) => {
       }
     });
     return queryParameters;
+  };
+
+  const noExample = (modelToParse) => {
+    const toReturn = {};
+    Object.keys(modelToParse).forEach((item) => {
+      if (item !== "example") toReturn[item] = modelToParse[item];
+    });
+    return toReturn;
+  };
+
+  const justExample = (modelToParse) => {
+    const toReturn = {};
+    Object.keys(modelToParse).forEach((item) => {
+      if (item === "example") toReturn[item] = modelToParse[item];
+    });
+    return toReturn;
   };
 
   return (
@@ -399,7 +417,7 @@ const EndPointCell = (props) => {
           <TabView
             value={tab}
             onChange={handleTab}
-            tabs={["Respuestas", "Test"]}
+            tabs={["Answer", "Example", "Test"]}
             content={[
               <Box>
                 <Typography paragraph>Response:</Typography>
@@ -409,7 +427,18 @@ const EndPointCell = (props) => {
                     width: "100%",
                   }}
                 >
-                  <ReactJson {...reactJsonProps} src={model} />
+                  <ReactJson {...reactJsonProps} src={noExample(model)} />
+                </Box>
+              </Box>,
+              <Box>
+                <Typography paragraph>Example response:</Typography>
+                <Box
+                  sx={{
+                    minHeight: "300px",
+                    width: "100%",
+                  }}
+                >
+                  <ReactJson {...reactJsonProps} src={justExample(model)} />
                 </Box>
               </Box>,
               <Box
@@ -427,7 +456,11 @@ const EndPointCell = (props) => {
                   {parent}
                   {endPoint.url}
                   {endPoint.method === "GET"
-                    ? `?${parseQuery(getValues())}`
+                    ? `${
+                        parseQuery(getValues()).length
+                          ? `?${parseQuery(getValues())}`
+                          : ""
+                      }`
                     : ""}
                 </Link>
                 <Loading
