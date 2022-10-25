@@ -341,6 +341,8 @@ const EndPointCell = (props) => {
                       required={item.required}
                       type="number"
                       sx={{ width: "100%" }}
+                      min={item.min || 0}
+                      placeholder={item.placeholder || ""}
                       {...field}
                     />
                   )}
@@ -356,6 +358,7 @@ const EndPointCell = (props) => {
                         <TextField
                           label={item.label}
                           sx={{ width: "100%" }}
+                          placeholder={item.placeholder || ""}
                           {...field}
                         />
                       )}
