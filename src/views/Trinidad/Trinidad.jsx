@@ -74,6 +74,7 @@ const Trinidad = (props) => {
     setLoading(true);
     try {
       const response = await axios.get(`${config.apiTrinidadUrl}docs/fetch`);
+      console.log(response);
       const data = await response.data;
       setWebGetPoints(data.webGetPoints);
       setMobileGetPoints(data.mobileGetPoints);
